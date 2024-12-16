@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:14:25 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/16 15:18:08 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:21:52 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(char *s)
 	size_t	len;
 
 	len = 0;
-	while (s[len] != NULL)
+	while (s[len] != '\0')
 		len++;
 	return (len);
 }

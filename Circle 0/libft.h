@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:03:33 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/16 16:02:35 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:00:13 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ size_t				ft_strlen(char *s);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strchr(const char *s, int c);
 
 #endif
