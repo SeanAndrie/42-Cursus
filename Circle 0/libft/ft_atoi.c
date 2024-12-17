@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 16:44:07 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 17:15:34 by sgadinga         ###   ########.fr       */
+/*   Created: 2024/12/17 10:24:10 by sgadinga          #+#    #+#             */
+/*   Updated: 2024/12/17 20:07:09 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+static int	is_overflow(int n)
 {
-	size_t	i;
-	size_t	src_len;
-	size_t	dst_len;
+}
 
-	if (!dst || !src)
-		return (0);
-	i = 0;
-	src_len = ft_strlen((char *)src);
-	dst_len = ft_strlen(dst);
-	while (src[i] != '\0' && dst_len + i < size - 1)
+int	ft_atoi(const char *nptr)
+{
+	int	res;
+	int	sign;
+
+	res = 0;
+	sign = 1;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
 	{
-		dst[i] = src[i];
-		i++;
+		sign *= -1;
+		nptr++;
 	}
-	dst[i] = '\0';
-	return (dst_len + src_len);
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr != '\0' && ft_isdigit(*nptr))
+		res = res * 10 + *nptr++ - '0';
+	return (res * sign);
 }
