@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:52:28 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/16 18:01:57 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:29:02 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,4 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)b_s);
 	}
 	return (NULL);
-}
-
-#include <stdio.h>
-
-int main(void)
-{
-	
 }
