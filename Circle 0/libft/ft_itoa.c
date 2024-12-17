@@ -38,7 +38,7 @@ char	*ft_itoa(int n)
 	int		n_digits;
 
 	if (n == 0)
-		return ("0");
+		return ft_strdup("0");
 	n_digits = count_digits(n);
 	res = (char *)malloc(n_digits + 1);
 	if (!res)
@@ -56,12 +56,4 @@ char	*ft_itoa(int n)
 		n /= 10;
 	}
 	return (res);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	printf("%s\n", ft_itoa(-123));
-	return (0);
 }

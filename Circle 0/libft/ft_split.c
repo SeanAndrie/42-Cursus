@@ -51,7 +51,7 @@ static char	*get_substr(const char *start, int len)
 	return (substr);
 }
 
-int	handle_substr_error(char **splits, int idx)
+int	check_substr_error(char **splits, int idx)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ char	**ft_split(const char *s, char c)
 		while (*s && !(*s == c))
 			s++;
 		splits[i] = get_substr(start, s - start);
-		if (handle_substr_error(splits, i))
+		if (check_substr_error(splits, i))
 			return (NULL);
 		i++;
 	}
