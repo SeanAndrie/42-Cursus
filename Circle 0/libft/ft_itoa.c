@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:54:42 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 19:11:09 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:38:27 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_itoa(int n)
 	int		n_digits;
 
 	if (n == 0)
-		return ft_strdup("0");
+		return (ft_strdup("0"));
 	n_digits = count_digits(n);
 	res = (char *)malloc(n_digits + 1);
 	if (!res)
