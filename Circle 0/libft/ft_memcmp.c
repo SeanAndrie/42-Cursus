@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:43:54 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 09:52:10 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:32:43 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	b_s2 = (const unsigned char *)s2;
 	while (n--)
 	{
-		if (*b_s2 != *b_s2)
+		if (*b_s1 != *b_s2)
 			return (*b_s1 - *b_s2);
-		*b_s1++;
-		*b_s2++;
+		b_s1++;
+		b_s2++;
 	}
 	return (0);
 }

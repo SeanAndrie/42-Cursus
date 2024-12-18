@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:52:28 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 09:29:02 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:27:27 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	b_s = (unsigned char *)s;
 	while (n--)
 	{
-		if (*b_s++ == (unsigned char)c)
+		if (*b_s == (unsigned char)c)
 			return ((void *)b_s);
+		b_s++;
 	}
 	return (NULL);
 }

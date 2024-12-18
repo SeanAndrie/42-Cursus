@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:24:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 20:07:09 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:26:19 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_overflow(long n, int digit, int sign)
 	{
 		if (sign == 1)
 			return (-1);
-		else 
+		else
 			return (0);
 	}
 	return (1);
@@ -26,9 +26,9 @@ static int	check_overflow(long n, int digit, int sign)
 
 int	ft_atoi(const char *nptr)
 {
-	int	res;
-	int	sign;
-	int check;
+	long	res;
+	int		sign;
+	int		check;
 
 	res = 0;
 	sign = 1;
@@ -48,5 +48,5 @@ int	ft_atoi(const char *nptr)
 		res = res * 10 + *nptr - '0';
 		nptr++;
 	}
-	return (res * sign);
+	return ((int)res * sign);
 }
