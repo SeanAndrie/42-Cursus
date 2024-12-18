@@ -6,11 +6,15 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:47:57 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/16 16:48:37 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:40:18 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_toupper(int c)
 {
-	return (c - 32);
+	if (ft_isalpha(c) && (c >= 'a' && c <= 'z'))
+		return (c - 32);
+	return (c);
 }

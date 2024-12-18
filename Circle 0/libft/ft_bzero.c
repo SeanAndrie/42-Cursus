@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:52:18 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/17 10:45:31 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:27:50 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@ void	ft_bzero(void *s, size_t n)
 
 	b_s = (unsigned char *)s;
 	while (n--)
-		*b_s++ = 0;
+	{
+		*b_s = 0;
+		b_s++;
+	}
 }
