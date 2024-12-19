@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:16:51 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/18 19:21:29 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:05:11 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static int	count_words(const char *s, char c)
 	return (count);
 }
 
-static char *alloc_word(const char **s, char c)
+static char	*alloc_word(const char **s, char c)
 {
-	const char *start;
-	int len;
-	char *word;
+	const char	*start;
+	int			len;
+	char		*word;
 
 	len = 0;
 	while (**s == c && **s)
@@ -56,7 +56,7 @@ static char *alloc_word(const char **s, char c)
 	return (word);
 }
 
-static void	 *free_splits(char **splits, int i)
+static void	*free_splits(char **splits, int i)
 {
 	while (--i >= 0)
 		free(splits[i]);
@@ -66,8 +66,8 @@ static void	 *free_splits(char **splits, int i)
 
 char	**ft_split(const char *s, char c)
 {
-	char		**splits;
-	int			i;
+	char	**splits;
+	int		i;
 
 	if (!s)
 		return (NULL);
@@ -93,9 +93,11 @@ char	**ft_split(const char *s, char c)
 
 #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-	char **splits = ft_split("the quick brown", ' ');
+	char	**splits;
+
+	splits = ft_split("the quick brown", ' ');
 	for (int i = 0; i < 3; i++)
 		printf("%s\n", splits[i]);
 	return (0);
