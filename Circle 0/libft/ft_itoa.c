@@ -34,26 +34,37 @@ static int	count_digits(int n)
 
 char	*ft_itoa(int n)
 {
+	long	nbr;
 	char	*res;
 	int		n_digits;
 
-	if (n == 0)
-		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	nbr = n;
 	n_digits = count_digits(n);
 	res = (char *)malloc(n_digits + 1);
 	if (!res)
 		return (NULL);
 	res[n_digits] = '\0';
-	if (n < 0)
+	if (nbr < 0)
 	{
-		n = -n;
 		res[0] = '-';
-		n_digits--;
+		nbr = -nbr;
 	}
-	while (n > 0)
+	while (nbr > 0)
 	{
-		res[n_digits--] = n % 10 + '0';
-		n /= 10;
+		res[(n_digits--) - 1] = nbr % 10 + '0';
+		nbr /= 10;
 	}
+	if (n == 0)
+        res[0] = '0';
 	return (res);
+}
+
+#include <stdio.h>
+
+int main(void)
+{
+	printf("%s\n", ft_itoa(123));
+	return (0);
 }

@@ -14,12 +14,15 @@
 
 static int	check_overflow(long n, int digit, int sign)
 {
-	if (n > (2147483647 / 10) || (n == (2147483647 / 10) && digit > 7))
+	const long max = 2147483647;
+	const long min = -2147483648;
+
+	if (n > (max / 10) || (n == (max / 10) && digit > 7))
 	{
 		if (sign == 1)
-			return (-1);
+			return (max);
 		else
-			return (0);
+			return (min);
 	}
 	return (1);
 }
