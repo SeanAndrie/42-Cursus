@@ -21,7 +21,7 @@ static int	count_words(const char *s, char c)
 	in_word = 0;
 	while (*s != '\0')
 	{
-		if (!(*s == c) && in_word == 0)
+		if (*s != c && in_word == 0)
 		{
 			count++;
 			in_word = 1;
@@ -33,65 +33,70 @@ static int	count_words(const char *s, char c)
 	return (count);
 }
 
-static char	*get_substr(const char *start, int len)
+static char *alloc_word(const char **s, char c)
 {
-	int		i;
-	char	*substr;
+	const char *start;
+	int len;
+	char *word;
 
-	i = 0;
-	substr = (char *)malloc(len + 1);
-	if (!substr)
-		return (NULL);
-	while (i < len)
+	len = 0;
+	while (**s == c && **s)
+		(*s)++;
+	start = *s;
+	while (**s && **s != c)
 	{
-		substr[i] = start[i];
-		i++;
+		(*s)++;
+		len++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	word = (char *)malloc(len + 1);
+	if (!word)
+		return (NULL);
+	ft_memcpy(word, start, len);
+	word[len] = '\0';
+	return (word);
 }
 
-static int	handle_substr_error(char **splits, int idx)
+static void	 *free_splits(char **splits, int i)
 {
-	int	i;
-
-	i = 0;
-	if (!splits[idx])
-	{
-		while (i < idx)
-			free(splits[i++]);
-		free(splits);
-		return (1);
-	}
-	return (0);
+	while (--i >= 0)
+		free(splits[i]);
+	free(splits);
+	return (NULL);
 }
 
 char	**ft_split(const char *s, char c)
 {
-	int			i;
-	int			n_words;
 	char		**splits;
-	const char	*start;
+	int			i;
 
-	if (!s || *s == '\0')
+	if (!s)
 		return (NULL);
-	i = 0;
-	n_words = count_words(s, c);
-	splits = (char **)malloc(sizeof(char *) * (n_words + 1));
+	splits = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!splits)
 		return (NULL);
+	i = 0;
 	while (*s)
 	{
-		while (*s == c && *s)
+		while (*s == c)
 			s++;
-		start = s;
-		while (*s && !(*s == c))
-			s++;
-		splits[i] = get_substr(start, s - start);
-		if (handle_substr_error(splits, i))
-			return (NULL);
-		i++;
+		if (*s)
+		{
+			splits[i] = alloc_word(&s, c);
+			if (!splits[i])
+				return (free_splits(splits, i - 1));
+			i++;
+		}
 	}
 	splits[i] = NULL;
 	return (splits);
+}
+
+#include <stdio.h>
+
+int main(void)
+{
+	char **splits = ft_split("the quick brown", ' ');
+	for (int i = 0; i < 3; i++)
+		printf("%s\n", splits[i]);
+	return (0);
 }
