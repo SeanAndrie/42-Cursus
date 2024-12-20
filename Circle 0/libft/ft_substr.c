@@ -14,7 +14,6 @@
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	size_t	i;
 	size_t 	s_len;
 	char	*substr;
 
@@ -30,7 +29,6 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	// Adjust len if it exceeds substr bounds
 	if (len >= s_len - start)
 		len = s_len - start;
-	i = 0;
 	substr = malloc(len + 1);
 	if (!substr)
 		return (NULL);

@@ -10,47 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+ifeq ($(OS), Windows_NT)
+	NAME = libft.lib
+else
+	NAME = libft.a
+endif
 
 CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+ARCHIVE = ar rcs
 
-CFLAGS = -Wall -Werror -Wextra
+ALL_C_FILES = ${wildcard *.c}
+EXCLUDE = ft_lstnew.c ft_lstlast.c ft_lstmap.c ft_lstadd_back.c \
+          ft_lstadd_front.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+          ft_lstsize.c test_libft.c
 
-C = -c
-
-LFLAGS = ar rcs
-
-SOURCE = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-		 ft_isprint.c ft_toupper.c ft_tolower.c ft_strlen.c \
-		 ft_strlcpy.c ft_strlcat.c ft_memset.c ft_memcpy.c \
-		 ft_memmove.c ft_memchr.c ft_memcmp.c ft_calloc.c \
-		 ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
-		 ft_putnbr_fd.c ft_bzero.c ft_itoa.c ft_strchr.c ft_strrchr.c \
-		 ft_strncmp.c ft_strnstr.c ft_strdup.c ft_substr.c ft_strjoin.c \
-		 ft_strtrim.c ft_split.c ft_strmapi.c ft_atoi.c \
-
-BSOURCE = ft_lstnew.c ft_lstlast.c ft_lstmap.c ft_lstadd_back.c \
-		ft_lstadd_front.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-		ft_lstsize.c \
+SOURCE = ${filter-out ${EXCLUDE}, ${ALL_C_FILES}}
+BONUS = ${filter-out test_libft.c, ${EXCLUDE}}
 
 OBJS = ${SOURCE:%.c=%.o}
+BOBJS = ${BONUS:%.c=%.o}
 
-BOBJS = ${BSOURCE:%.c=%.o}
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
-all: ${NAME}
+all: ${NAME} bonus
 
-${NAME}: ${NAME} ${OBJS} ${SOURCE}
-	     ${CC} ${CFLAGS} ${C} ${SOURCE}
-	     ${LFLAGS} ${NAME} ${OBJS}
+${NAME}: ${OBJS}
+	${ARCHIVE} ${NAME} ${OBJS}
 
-bonus: ${NAME} ${BOBJS} ${BSOURCE}
-	   ${CC} ${CFLAGS} ${C} ${BSOURCE}
-	   ${LFLAGS} ${NAME} ${BOBJS}
+bonus: ${BOBJS}
+	${ARCHIVE} ${NAME} ${BOBJS}
 
-clean: 
+clean:
+ifeq (${OS}, Windows_NT)
+	del /Q *.o
+else
 	rm -f *.o
+endif
 
 fclean: clean
+ifeq (${OS}, Windows_NT)
+	del /Q ${NAME}
+else
 	rm -f ${NAME}
-
+endif
+	
 res: fclean all
+
+.PHONY: clean fclean res all bonus ${NAME}

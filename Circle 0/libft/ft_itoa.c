@@ -60,11 +60,3 @@ char	*ft_itoa(int n)
         res[0] = '0';
 	return (res);
 }
-
-#include <stdio.h>
-
-int main(void)
-{
-	printf("%s\n", ft_itoa(123));
-	return (0);
-}

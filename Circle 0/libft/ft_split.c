@@ -77,10 +77,7 @@ char	**ft_split(const char *s, char c)
 	i = 0;
 	while (*s)
 	{
-		while (*s == c)
-			s++;
-		if (*s)
-		{
+		if (*s){
 			splits[i] = alloc_word(&s, c);
 			if (!splits[i])
 				return (free_splits(splits, i - 1));
@@ -89,16 +86,4 @@ char	**ft_split(const char *s, char c)
 	}
 	splits[i] = NULL;
 	return (splits);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char	**splits;
-
-	splits = ft_split("the quick brown", ' ');
-	for (int i = 0; i < 3; i++)
-		printf("%s\n", splits[i]);
-	return (0);
 }
