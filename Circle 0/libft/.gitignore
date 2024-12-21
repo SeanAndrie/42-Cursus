@@ -2,7 +2,6 @@
 *.o
 *.exe
 .DS_Store
-*.o
 test_libft
 test_libft.c
 libftTester

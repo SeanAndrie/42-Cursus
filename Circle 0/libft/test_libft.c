@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 13:49:36 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/18 18:47:15 by sgadinga         ###   ########.fr       */
+/*   Created: 2024/12/20 23:59:10 by sgadinga          #+#    #+#             */
+/*   Updated: 2024/12/20 23:59:10 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,97 +16,153 @@
 #include <ctype.h>
 #include <stdio.h>
 
-int arr_size(char **arr)
+void	assertion_failure(char *func_name, const char *args, int expected, int actual)
 {
-	int count = 0;
-	while (arr[count] != NULL)
-		count++;
-	return (count);
+	printf("---------------------------------\n");
+    printf("Assertion failed in %s:\n", func_name);
+    printf("Arguments: %s\n", args);
+    printf("Expected: %d, Got: %d\n", expected, actual);
+    printf("---------------------------------\n");
+	printf("%s\t:\tFAIL\n", func_name);
 }
 
-void	char_checks(char *name, int (og_f)(int), int (my_f)(int))
+void	char_check(char *name, int (og_f)(int), int (my_f)(int))
 {
-	for (int c = -128; c <= 127; c++)
-		assert(og_f(c) == my_f(c));
-	printf("%s\t: PASS\n", name);
+	char str[2];
+	for (int c = -128; c <= 127; c++){
+		str[0] = c;
+		str[1] = '\0';
+		if (!!og_f(c) != !!my_f(c))
+		{
+			assertion_failure(name, str, !!og_f(c), !!my_f(c));
+			return ;
+		}
+	}
+	printf("%s\t(Signed & Unsigned Chars)\t:\tPASS\n", name);
 }
 
 void	test_strlen(char **strs)
 {
 	for (int i = 0; i < 5; i++)
-		assert(strlen(strs[i]) == ft_strlen(strs[i]));
-	printf("ft_strlen\t: PASS\n");
+	{
+		if (ft_strlen(strs[i]) != strlen(strs[i]))
+		{
+			assertion_failure("ft_strlen", strs[i], strlen(strs[i]), ft_strlen(strs[i]));
+			return ;
+		}
+	}
+	printf("ft_strlen\t(Selected Strings)\t\t:\tPASS\n");
 }
 
 void	test_strchr(char *str)
 {
-	for (int c = 0; c <= 127; c++)
-		assert(strchr(str, c) == ft_strchr(str, c));
-	printf("ft_strchr\t: PASS\n");
+	for (int c = -128; c <= 127; c++)
+	{
+		if (ft_strchr(str, c) != strchr(str, c))
+		{
+			assertion_failure("ft_strchr", str, strchr(str, c) != NULL, ft_strchr(str, c) != NULL);
+			return ;
+		}
+	}
+	printf("ft_strchr\t(Signed & Unsigned Chars)\t:\tPASS\n");
 }
 
 void	test_strrchr(char *str)
 {
-	for (int c = 0; c <= 127; c++)
-		assert(strrchr(str, c) == ft_strrchr(str, c));
-	printf("ft_strrchr\t: PASS\n");
-}
-
-void	test_strncmp(char *case_name, const char *s1, const char *s2, size_t n)
-{
-	assert(strncmp(s1, s2, n) == ft_strncmp(s1, s2, n));
-	printf("ft_strncmp (%s)\t: PASS\n", case_name);
-}
-
-void	test_memset()
-{
-	char b1[10];
-	char b2[10];
-
-	for (int c = 0; c < 256; c++)
+	for (int c = -128; c <= 127; c++)
 	{
-		memset(b1, c, 10);
-		ft_memset(b2, c, 10);
-		assert(memcmp(b1, b2, 10) == 0);
+		if (ft_strrchr(str, c) != strrchr(str, c))
+		{
+			assertion_failure("ft_strchr", str, strrchr(str, c) != NULL, ft_strrchr(str, c) != NULL);
+			return ;
+		}
 	}
+	printf("ft_strchr\t(Signed & Unsigned Chars)\t:\tPASS\n");
 }
 
-// void	test_bzero()
-// {
-// 	char b1[10];
-// 	char b2[10];
-// 	bzero(b1, 10);
-// 	ft_bzero(b2, 10);
-// 	assert(memcmp(b1, b2, 10) == 0);
-// }
-
-int	main(void)
+void test_strncmp(char *case_name, const char *s1, const char *s2, size_t n) 
 {
-	char *strs[] = {"", "hello", "12345", "test case", "A long string for testing!"};
-	printf("\nCharacter Checks\n");
-	char_checks("ft_isalpha", isalpha, ft_isalpha);
-	char_checks("ft_isdigit", isdigit, ft_isdigit);
-	char_checks("ft_isalnum", isalnum, ft_isalnum);
-	char_checks("ft_isascii", isascii, ft_isascii);
-	char_checks("ft_isprint", isprint, ft_isprint);
+    int expected = strncmp(s1, s2, n);
+    int actual = ft_strncmp(s1, s2, n);
+    if (expected != actual) 
+	{
+        assertion_failure("ft_strncmp", case_name, expected, actual);
+		return ;
+    }
+    printf("ft_strncmp (%s)\t: PASS\n", case_name);
+}
 
-	printf("\nString Manipulation\n");
+void test_memset() {
+    char b1[10];
+    char b2[10];
+
+    for (int c = 0; c < 256; c++) 
+	{
+        memset(b1, c, 10);
+        ft_memset(b2, c, 10);
+        if (memcmp(b1, b2, 10) != 0) 
+		{
+            assertion_failure("ft_memset", "b1, b2", 0, 1);
+			return ;
+        }
+    }
+    printf("ft_memset\t:\tPASS\n");
+}
+
+void test_memcpy(char *case_name, const char *src) {
+    char dst1[20] = "";
+    char dst2[20] = "";
+
+    ft_memcpy(dst1, src, 20);
+    memcpy(dst2, src, 20);
+    if (memcmp(dst1, dst2, 20) != 0) 
+	{
+        assertion_failure("ft_memcpy", src, 0, 1);
+		return ;
+    }
+
+    printf("ft_memcpy (%s):\tPASS\n", case_name);
+}
+
+void test_memmove(char *case_name, char *src, char *dst1, char *dst2, size_t n) {
+    ft_memmove(dst1, src, n);
+    memmove(dst2, src, n);
+    if (memcmp(dst1, dst2, n) != 0) 
+	{
+        assertion_failure("ft_memmove (%s)", "src: Hello, World!, dst1: uninitialized, dst2: uninitialized", 0, 1);
+		return ;
+	}
+
+    printf("ft_memmove (%s)\t:\tPASS\n", case_name);
+}
+
+void	character_checks() 
+{
+    char_check("ft_isalpha", isalpha, ft_isalpha);
+    char_check("ft_isdigit", isdigit, ft_isdigit);
+    char_check("ft_isalnum", isalnum, ft_isalnum);
+    char_check("ft_isascii", isascii, ft_isascii);
+    char_check("ft_isprint", isprint, ft_isprint);
+}
+
+int main(void)
+{
+	char *src = "Hello, World!";
+	char dst1[10];
+	char dst2[10];
+
+	char *strs[] = {"", "hello", "12345", "test case", "A long string for testing!", "abc\0efg"};
+	printf("---------------------------------\n");
+	character_checks();
 	test_strlen(strs);
-
 	test_strchr("HelloWorld");
 	test_strrchr("HelloWorld");
-
-	test_strncmp("Identical Matching", "abc", "abc", 3);
-	test_strncmp("Same Prefix #1", "hello", "helloworld", 5);
-	test_strncmp("Same Prefix #2", "helloworld", "hello", 5);
-	test_strncmp("Equal Strings", "hello", "hello", 5);
-	test_strncmp("Boundary Testing", "hello", "world", 0);
-	test_strncmp("Empty Strings", "", "hello", 5);
-
+	
 	test_memset();
-	// test_bzero();
-
-	printf("\nPassed all tests!\n\n");
+	test_memmove("Normaly Copy", src, dst1, dst2, 10);
+	test_memcpy("Normal Copy", "Hello, World!");
+	test_memcpy("Zero Bytes to Copy", "Hello, World!");
+	printf("---------------------------------\n");
 
 	return (0);
 }

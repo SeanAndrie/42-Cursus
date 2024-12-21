@@ -42,6 +42,10 @@ ${NAME}: ${OBJS}
 bonus: ${BOBJS}
 	${ARCHIVE} ${NAME} ${BOBJS}
 
+test: 
+	${CC} -o test_libft ${SOURCE} test_libft.c
+	test_libft.exe
+
 clean:
 ifeq (${OS}, Windows_NT)
 	del /Q *.o
