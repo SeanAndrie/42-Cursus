@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *s, int c)
 			last = s;
 		s++;
 	}
-	if (c == '\0')
+	if (*s == (char)c)
 		return ((char *)s);
 	return ((char *)last);
 }

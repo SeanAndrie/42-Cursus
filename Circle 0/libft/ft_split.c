@@ -51,8 +51,7 @@ static char	*alloc_word(const char **s, char c)
 	word = (char *)malloc(len + 1);
 	if (!word)
 		return (NULL);
-	ft_memcpy(word, start, len);
-	word[len] = '\0';
+	ft_strlcpy(word, start, len + 1);
 	return (word);
 }
 
@@ -77,7 +76,7 @@ char	**ft_split(const char *s, char c)
 	i = 0;
 	while (*s)
 	{
-		if (*s){
+		if (*s != '\0'){
 			splits[i] = alloc_word(&s, c);
 			if (!splits[i])
 				return (free_splits(splits, i - 1));

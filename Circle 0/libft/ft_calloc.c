@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void *ft_calloc(size_t nmemb, size_t size)
+void 	*ft_calloc(size_t nmemb, size_t size)
 {
     void *res;
     size_t	total_size;
