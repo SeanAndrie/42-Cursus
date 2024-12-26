@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:16:51 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/19 09:05:11 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/26 12:41:02 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*alloc_word(const char **s, char c)
 	char		*word;
 
 	len = 0;
-	while (**s == c && **s)
+	while (**s && **s == c)
 		(*s)++;
 	start = *s;
 	while (**s && **s != c)
@@ -48,7 +48,7 @@ static char	*alloc_word(const char **s, char c)
 		(*s)++;
 		len++;
 	}
-	word = (char *)malloc(len + 1);
+	word = ft_calloc(len + 1, sizeof(char));
 	if (!word)
 		return (NULL);
 	ft_strlcpy(word, start, len + 1);
@@ -70,19 +70,21 @@ char	**ft_split(const char *s, char c)
 
 	if (!s)
 		return (NULL);
-	splits = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	splits = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	if (!splits)
 		return (NULL);
 	i = 0;
 	while (*s)
 	{
-		if (*s != '\0'){
+		while (*s && *s == c)
+			s++;
+		if (*s != '\0')
+		{
 			splits[i] = alloc_word(&s, c);
 			if (!splits[i])
-				return (free_splits(splits, i - 1));
+				return (free_splits(splits, i));
 			i++;
 		}
 	}
-	splits[i] = NULL;
 	return (splits);
 }

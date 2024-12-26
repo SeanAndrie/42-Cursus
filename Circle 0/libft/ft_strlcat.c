@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:44:07 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/18 19:49:16 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:36:12 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	src_len;
 	size_t	dst_len;
 
-	if (!dst || !src)
-		return (0);
 	i = 0;
 	src_len = ft_strlen((char *)src);
 	dst_len = ft_strlen(dst);

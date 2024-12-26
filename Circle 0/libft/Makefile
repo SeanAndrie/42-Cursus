@@ -5,20 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/18 18:12:49 by sgadinga          #+#    #+#              #
-#    Updated: 2024/12/18 19:53:49 by sgadinga         ###   ########.fr        #
+#    Created: 2024/12/25 18:51:11 by sgadinga          #+#    #+#              #
+#    Updated: 2024/12/26 12:30:09 by sgadinga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifeq ($(OS), Windows_NT)
-	NAME = libft.lib
-else
-	NAME = libft.a
-endif
+NAME = libft.a
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-ARCHIVE = ar rcsc
+ARCHIVE = ar rcs
 
 SOURCE = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 	  	 ft_isalpha.c ft_isascii.c ft_isdigit.c \
@@ -38,35 +34,25 @@ BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 OBJS = ${SOURCE:%.c=%.o}
 BOBJS = ${BONUS:%.c=%.o}
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+%.o : %.c
+	${CC} ${CFLAGS} -c $< -o $@ 
 
-all: ${NAME}
+all : ${NAME}
 
-${NAME}: ${OBJS}
+${NAME} : ${OBJS}
 	${ARCHIVE} ${NAME} ${OBJS}
 
-bonus: ${BOBJS}
+bonus : ${BOBJS}
 	${ARCHIVE} ${NAME} ${BOBJS}
 
-test:
-	${CC} -o libft_test ${SOURCE} libft_test.c
-	libft_test.exe
+test: ${SOURCE} ${BONUS}
+	${CC} -o libft_test ${SOURCE} ${BONUS} libft_test.c
+	./libft_test
 
-clean:
-ifeq (${OS}, Windows_NT)
-	del /Q *.o
-else
-	rm -f *.o
-endif
+clean :
+	rm -f ${OBJS};
 
 fclean: clean
-ifeq (${OS}, Windows_NT)
-	del /Q ${NAME}
-else
 	rm -f ${NAME}
-endif
-	
-res: fclean all
 
-.PHONY: clean fclean res all bonus ${NAME}
+re: fclean all
