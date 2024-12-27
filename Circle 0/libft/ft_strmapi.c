@@ -18,10 +18,10 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	char			*map;
 
 	i = 0;
-	map = (char *)malloc(ft_strlen((char *)s) + 1);
+	map = (char *)malloc(ft_strlen(s) + 1);
 	if (!map)
 		return (NULL);
-	while (s[i] != '\0')
+	while (s[i])
 	{
 		map[i] = f(i, s[i]);
 		i++;

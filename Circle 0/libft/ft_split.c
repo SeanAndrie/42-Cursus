@@ -88,13 +88,3 @@ char	**ft_split(const char *s, char c)
 	}
 	return (splits);
 }
-
-#include <stdio.h>
-
-int main(void)
-{
-	char *str = "The quick brown fox jumped over the lazy dog";
-	char **splits = ft_split(str, ' ');
-
-	return (0);
-}
