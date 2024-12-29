@@ -45,12 +45,15 @@ ${NAME} : ${OBJS}
 bonus : ${BOBJS}
 	${ARCHIVE} ${NAME} ${BOBJS}
 
-test: ${SOURCE} ${BONUS}
-	${CC} -o libft_test ${SOURCE} ${BONUS} libft_test.c
+test : ${NAME}
+	${CC} ${CFLAGS} -o libft_test ${NAME} libft_test.c
 	./libft_test
 
 clean :
-	rm -f ${OBJS};
+	rm -f ${OBJS}
+
+bclean:
+	rm -f ${BOBJS}
 
 fclean: clean
 	rm -f ${NAME}

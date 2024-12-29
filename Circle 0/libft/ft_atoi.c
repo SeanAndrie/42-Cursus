@@ -14,7 +14,7 @@
 
 static int	check_overflow(int n, char digit, int sign)
 {
-	if (n == (2147483647 / 10) || (n == (2147483647 / 10) && digit > 7))
+	if (n == (2147483647 / 10) || (n == (2147483647 / 10) && (digit - '0') > 7))
 	{
 		if (sign == 1)
 			return (2147483647);
@@ -40,13 +40,13 @@ int	ft_atoi(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
-	while (ft_isdigit(*nptr))
+	while (*nptr && ft_isdigit(*nptr))
 	{
 		check = check_overflow(res, *nptr, sign);
-		if (check != 1)
+		if (check != 0)
 			return (check);
 		res = res * 10 + *nptr - '0';
 		nptr++;
 	}
-	return ((int)res * sign);
+	return ((int)(res * sign));
 }
