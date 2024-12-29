@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:16:51 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/26 20:32:47 by sgadinga         ###   ########.fr       */
+/*   Updated: 2024/12/29 13:30:24 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,4 @@ char	**ft_split(const char *s, char c)
 		}
 	}
 	return (splits);
-}
-
-#include <stdio.h>
-
-int main(void)
-{
-	char *str = "The quick brown fox jumped over the lazy dog";
-	char **splits = ft_split(str, ' ');
-
-	return (0);
 }
