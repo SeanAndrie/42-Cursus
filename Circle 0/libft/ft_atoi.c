@@ -14,7 +14,7 @@
 
 static int	check_overflow(int n, char digit, int sign)
 {
-	if (n == (2147483647 / 10) || (n == (2147483647 / 10) && digit - '0' > 7))
+	if (n == (2147483647 / 10) || (n == (2147483647 / 10) && (digit - '0') > 7))
 	{
 		if (sign == 1)
 			return (2147483647);
