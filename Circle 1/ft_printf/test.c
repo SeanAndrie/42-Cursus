@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:11:21 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 12:18:54 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:25:42 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	compare_out_int(char *format, void *ptr)
 
 int	main(void)
 {
-	compare_out_int("|%-15p|\n", NULL);
+	compare_out_int("|%15p|\n", NULL);
 	return (0);
 }

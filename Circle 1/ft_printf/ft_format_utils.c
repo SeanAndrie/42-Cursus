@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:23:47 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 12:26:43 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:23:56 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_set_hex_n(t_formatspec *fs, void *ptr, unsigned long *n)
 void	ft_set_hex_str(t_formatspec *fs, char **hex_str, unsigned long n)
 {
 	if (fs->specifier == 'p' && n == 0)
-		*hex_str = ft_strdup("(nil)");
+		*hex_str = ft_strdup(NULLPTR);
 	else
 		*hex_str = ft_gethex_str(n, ft_get_base(fs));
 }

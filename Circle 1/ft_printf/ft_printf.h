@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 02:07:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 11:44:38 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:24:37 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 // REMOVE THESE
 # include <limits.h>
 # include <stdio.h>
+
+# if defined (__linux__)
+# define NULLPTR "(nil)"
+# elif defined (__APPLE__)
+# define NULLPTR "0x0"
+# endif
 
 # define HEX_UPR "0123456789ABCDEF"
 # define HEX_LWR "0123456789abcdef"
