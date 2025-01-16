@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:12:11 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/15 20:58:53 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:38:23 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_parse_by_spec(t_formatspec *fs, va_list args)
 {
 	int	len;
 
+	len = 0;
 	if (fs->specifier == 'c')
 		len = ft_parse_char(fs, va_arg(args, int));
 	else if (fs->specifier == 's')

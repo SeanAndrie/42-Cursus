@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 02:07:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 14:24:37 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:40:06 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 
 # if defined (__linux__)
 # define NULLPTR "(nil)"
+# define NULLPTRLEN 5
 # elif defined (__APPLE__)
 # define NULLPTR "0x0"
+# define NULLPTRLEN "3"
 # endif
 
 # define HEX_UPR "0123456789ABCDEF"

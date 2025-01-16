@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 23:04:48 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 12:17:42 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:40:34 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ft_pad_and_justify(t_formatspec *fs, unsigned long n, int n_char,
 
 	len = 0;
 	if (fs->specifier == 'p' && n == 0)
-		total_len = 5;
+		total_len = NULLPTRLEN;
 	len += ft_right_justify(fs, &total_len);
 	if (n != 0)
 		len += ft_apply_prefix(fs, n);
