@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:12:11 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 14:38:23 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:56:36 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_parse_by_spec(t_formatspec *fs, va_list args)
 		len = ft_parse_hex(fs, va_arg(args, void *));
 	else if (fs->specifier == '%')
 		len = ft_putchar_len('%');
+	else
+		len = ft_putchar_len(fs->specifier);
 	return (len);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   printf_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:11:21 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 14:25:42 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:21:12 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	compare_out_int(char *format, void *ptr)
 
 int	main(void)
 {
-	compare_out_int("|%15p|\n", NULL);
+	int	n;
+
+	n = 42;
+	compare_out_int("|%-15p|\n", &n);
+	compare_out_int("|%15p|\n", &n);
+	compare_out_int("|%-8p|\n", &n);
+	compare_out_int("|%8p|\n", &n);
 	return (0);
 }

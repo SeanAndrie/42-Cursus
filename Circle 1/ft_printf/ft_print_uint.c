@@ -6,13 +6,13 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:49:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 05:03:13 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:45:43 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putuint_len(unsigned int n)
+static int	ft_putuint_len(unsigned int n)
 {
 	int	len;
 
@@ -23,7 +23,7 @@ int	ft_putuint_len(unsigned int n)
 	return (len);
 }
 
-int	ft_count_digits_unsigned(unsigned int n)
+static int	ft_count_digits_unsigned(unsigned int n)
 {
 	int	count;
 

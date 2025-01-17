@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 02:07:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 14:40:06 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:49:36 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
+# include <limits.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include <stdlib.h>
 
-// REMOVE THESE
-# include <limits.h>
-# include <stdio.h>
-
-# if defined (__linux__)
-# define NULLPTR "(nil)"
-# define NULLPTRLEN 5
-# elif defined (__APPLE__)
-# define NULLPTR "0x0"
-# define NULLPTRLEN "3"
+# if defined(__linux__)
+#  define NULLPTR "(nil)"
+# elif defined(__APPLE__)
+#  define NULLPTR "0x0"
 # endif
 
 # define HEX_UPR "0123456789ABCDEF"
@@ -71,7 +67,6 @@ int				ft_putstr_len(char *s);
 int				ft_parse_str(t_formatspec *fs, char *s);
 
 // ft_print_dec_int
-int				ft_putdi_len(int n);
 int				ft_parse_dec_int(t_formatspec *fs, int n);
 
 // ft_print_uint

@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 23:04:48 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 14:40:34 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:49:49 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int	ft_pad_and_justify(t_formatspec *fs, unsigned long n, int n_char,
 
 	len = 0;
 	if (fs->specifier == 'p' && n == 0)
-		total_len = NULLPTRLEN;
+		total_len = ft_strlen(NULLPTR);
 	len += ft_right_justify(fs, &total_len);
-	if (n != 0)
+	if (n != 0 || fs->specifier == 'p')
 		len += ft_apply_prefix(fs, n);
 	if (fs->precision > n_char)
 		len += ft_width_padding(fs->precision, n_char, '0');
@@ -95,6 +95,8 @@ int	ft_parse_hex(t_formatspec *fs, void *ptr)
 		len += ft_putstr_len(hex_str);
 	else if (fs->precision == 0 && fs->width > 0)
 		len += ft_putchar_len(' ');
+	if (fs->specifier == 'p' && n == 0)
+		total_len = ft_strlen(NULLPTR);
 	len += ft_left_justify(fs, &total_len);
 	free(hex_str);
 	return (len);

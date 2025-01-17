@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cc test.c libftprintf.a
+cc printf_test.c libftprintf.a
 ./a.out

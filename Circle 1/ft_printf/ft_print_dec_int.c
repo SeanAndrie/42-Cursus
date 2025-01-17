@@ -6,13 +6,13 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:23:39 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/16 11:51:27 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:45:18 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putdi_len(int n)
+static int	ft_putdi_len(int n)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ int	ft_putdi_len(int n)
 	return (len);
 }
 
-int	ft_count_digits_signed(int n)
+static int	ft_count_digits_signed(int n)
 {
 	int	count;
 
