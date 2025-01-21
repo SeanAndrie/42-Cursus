@@ -7,4 +7,6 @@ for file in *.c; do
 		break
 	fi
 done
+echo "---"
+norminette
 echo "Formatting Complete!"

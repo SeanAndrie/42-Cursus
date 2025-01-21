@@ -1,19 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_test.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 20:57:53 by sgadinga          #+#    #+#             */
+/*   Updated: 2025/01/20 22:58:26 by sgadinga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 
 int	main(void)
 {
+	char	*line;
 	int		fd;
-	char	buffer[256];
-	int		chars_read;
 
 	fd = open("file.txt", O_RDONLY);
-	while (chars_read = read(fd, buffer, 25))
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		buffer[chars_read] = '\0';
-		printf("buffer->%s\n", buffer);
+		printf("%s", line);
+		free(line);
 	}
 	return (0);
 }

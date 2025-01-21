@@ -5,101 +5,108 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 21:41:46 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/17 13:28:04 by sgadinga         ###   ########.fr       */
+/*   Created: 2025/01/20 14:52:32 by sgadinga          #+#    #+#             */
+/*   Updated: 2025/01/21 12:58:30 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*create_node(char *content)
+t_node	*create_node(char *content)
 {
-	t_list	*node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
 	node->content = ft_strdup(content);
 	if (!node->content)
 	{
-		free(node->content);
+		free(node);
 		return (NULL);
 	}
 	node->next = NULL;
 	return (node);
 }
 
-void	append_to_list(t_list **head, t_list *node)
+void	append_node(t_node **head, t_node *node)
 {
-	t_list	*last;
+	t_node	*last;
 
+	if (!node)
+		return ;
 	if (!*head)
 	{
 		*head = node;
 		return ;
 	}
-	if (!node)
-		return ;
 	last = *head;
 	while (last->next)
 		last = last->next;
 	last->next = node;
 }
 
-void    clear_list(t_list **head)
+void	cleanup_processed_nodes(t_node **head)
 {
-    t_list *next_node;
-    if (!head)
-        return ;
-    while (*head)
-    {
-        next_node = (*head)->next;
-        free((*head)->content);
-        free(*head);
-        *head = next_node;
-    }
+	t_node	*curr;
+	char	*remain;
+	int		i;
+
+	curr = *head;
+	while (curr && curr->content)
+	{
+		i = 0;
+		while (curr->content[i] && curr->content[i] != '\n')
+			i++;
+		if (curr->content[i] == '\n' && curr->content[++i])
+		{
+			remain = ft_strdup(curr->content + i);
+			free(curr->content);
+			curr->content = remain;
+			break ;
+		}
+		*head = curr->next;
+		free(curr->content);
+		free(curr);
+		curr = *head;
+	}
 }
 
-char	*ft_strdup(const char *s)
+void	clear_list(t_node **head)
 {
-	size_t	len;
-	char	*res;
-	size_t	i;
+	t_node	*next;
+
+	if (!*head)
+		return ;
+	while (*head)
+	{
+		next = (*head)->next;
+		free((*head)->content);
+		free(*head);
+		*head = next;
+	}
+}
+
+char	*ft_strdup(char *s)
+{
+	int		i;
+	int		len;
+	char	*dup;
 
 	if (!s)
 		return (NULL);
 	len = 0;
 	while (s[len])
 		len++;
-	res = malloc(len + 1);
-	if (!res)
+	dup = malloc(len + 1);
+	if (!dup)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s[i])
 	{
-		res[i] = s[i];
+		dup[i] = s[i];
 		i++;
 	}
-	res[i] = '\0';
-	return (res);
+	dup[i] = '\0';
+	return (dup);
 }
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
-// int main(void)
-// {
-//     char *s = "Hello, World!";
-//     printf("%s\n", ft_strchr(s, ' '));
-//     return (0);
-// }
