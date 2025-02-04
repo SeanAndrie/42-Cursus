@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_test.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@42.abudhabi.e>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 20:57:53 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/20 22:58:26 by sgadinga         ###   ########.fr       */
+/*   Created: 2025/01/29 21:38:09 by sgadinga          #+#    #+#             */
+/*   Updated: 2025/02/02 20:59:23 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ int	main(void)
 	fd = open("file.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
+		printf(line);
 		free(line);
 	}
+
+	// printf("%s\n", get_next_line(fd));
+
+	close(fd);
 	return (0);
 }

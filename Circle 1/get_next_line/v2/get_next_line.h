@@ -3,37 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@42.abudhabi.e>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 16:54:23 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/01/21 12:23:41 by sgadinga         ###   ########.fr       */
+/*   Created: 2025/02/02 21:09:32 by sgadinga          #+#    #+#             */
+/*   Updated: 2025/02/04 11:14:24 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <fcntl.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+// FOR TESTING
+# include <stdio.h>
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <unistd.h>
-
-typedef struct s_node
+typedef struct s_list
 {
-	char			*content;
-	struct s_node	*next;
-}					t_node;
+	char			*buffer;
+	size_t			length;
+	struct s_list	*next;
+}					t_list;
 
 char				*get_next_line(int fd);
-t_node				*create_node(char *content);
-void				append_node(t_node **head, t_node *node);
-void				clear_list(t_node **head);
-void				cleanup_processed_nodes(t_node **head);
-char				*ft_strdup(char *s);
-
+char				*ft_strchr(const char *s, int c);
+t_list				*create_node(char *buffer);
+void				append_node(t_list **head, char *buffer);
+void				update_remainder(t_list **head);
+void				clear_list(t_list **head);
 #endif
