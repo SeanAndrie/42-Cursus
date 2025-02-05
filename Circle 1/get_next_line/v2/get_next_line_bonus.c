@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@42.abudhabi.e>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 01:03:18 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:38 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:30:46 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*alloc_line(t_list **head)
 		nl_pos = ft_strchr(curr->buffer, '\n');
 		if (nl_pos)
 		{
-			len += (nl_pos - curr->buffer) + 2;
+			len += (nl_pos - curr->buffer) + 1;
 			break ;
 		}
 		len += curr->length;

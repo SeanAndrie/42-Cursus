@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@42.abudhabi.e>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:12:29 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/02/04 17:35:14 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:26:51 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	update_remainder(t_list **head)
 	{
 		remain = ft_strdup(remain + 1, &len);
 		clear_list(head);
-		if (remain[0] == '\0')
+		if (remain[0] != '\0')
 			append_node(head, remain);
 		free(remain);
 	}
