@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 int ft_isspace(int c)
 {
@@ -8,8 +7,6 @@ int ft_isspace(int c)
 
 void *ft_calloc(size_t n, size_t size)
 {
-    if (size == 0)
-        return (malloc(0));
     size_t total_size = n * size;
     if (size != 0 && total_size / size != n)
         return (NULL);
@@ -24,7 +21,7 @@ void *ft_calloc(size_t n, size_t size)
 
 int count_words(char *str)
 {
-    int in_word = 0, count = 0;
+    int count = 0, in_word = 0;
     while (*str)
     {
         if (!ft_isspace(*str) && !in_word)
@@ -42,10 +39,10 @@ int count_words(char *str)
 char *alloc_word(char **str)
 {
     char *start;
-    while (**str && ft_isspace(**str)) (*str)++;
+    while (**str && ft_isspace(**str)) str++;
     start = *str;
-    int len = 0, i = 0;
-    while (**str && !ft_isspace(**str)) 
+    int i = 0, len = 0;
+    while (**str && !ft_isspace(**str))
     {
         len++;
         (*str)++;
@@ -92,9 +89,11 @@ char **ft_split(char *str)
     return (splits);
 }
 
+#include <stdio.h>
+
 int main(void)
 {
-    char *s = "the quick brown fox";
+    char s[] = "the quick brown fox jumped over the lazy dog";
     char **splits = ft_split(s);
     for (int i = 0; i < count_words(s); i++)
     {
