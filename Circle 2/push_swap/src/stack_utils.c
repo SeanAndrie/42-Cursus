@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:17:40 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 02:27:13 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:14:34 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,46 @@ int	find_index(t_stack *stack, int value)
 	return (-1);
 }
 
-char **stack_to_tokens(t_stack *stack)
+static t_stack	*copy_stack_contents(t_stack *src, t_stack *dst)
 {
-	int i;
-	t_node *curr;
-	char **tokens;
+	t_node	*curr;
+	t_node	*node;
 
-	if (!stack || !stack->head)
-		return (NULL);
-	tokens = ft_calloc(stack->size + 1, sizeof(char *));
-	if (!tokens)
-		return (NULL);
-	i = 0;
-	curr = stack->head;
+	curr = src->head;
 	while (curr)
 	{
-		tokens[i] = ft_itoa(curr->data);
-		if (!tokens[i])
-			return (free_tokens(tokens));
+		node = create_node(curr->data);
+		if (!node)
+			return (free_stack(dst));
+		append(dst, node);
+		dst->size++;
 		curr = curr->next;
-		i++;
 	}
-	return (tokens);
+	return (dst);
 }
 
-t_stack *stack_copy(t_stack *stack)
+t_stack	*stack_copy(t_stack *stack)
 {
-	t_stack *copy;
-	char **tokens;
+	t_stack	*copy;
 
-	tokens = stack_to_tokens(stack);
-	if (!tokens)
+	if (!stack)
 		return (NULL);
-	copy = create_stack(tokens, stack->name);
+	copy = stack_init();
 	if (!copy)
 		return (NULL);
-	return (copy);	
+	if (stack->name)
+	{
+		copy->name = ft_strdup(stack->name);
+		if (!copy->name)
+		{
+			free(copy);
+			return (NULL);
+		}
+	}
+	copy = copy_stack_contents(stack, copy);
+	if (!copy)
+		return (NULL);
+	return (copy);
 }
 
 int	stack_max(t_stack *stack)

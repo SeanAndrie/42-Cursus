@@ -45,8 +45,8 @@ void	quick_sort(int *arr, int low, int high)
 
 void	stack_to_sorted_hashmap(t_stack *stack, t_hashmap **map)
 {
-	int		*arr;
-	int		i;
+	int	*arr;
+	int	i;
 
 	if (!stack || !map || stack->size == 0)
 		return ;

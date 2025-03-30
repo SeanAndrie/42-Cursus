@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 15:01:20 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 03:24:45 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:16:26 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,27 @@ void	add_action(t_action **head, char *name)
 	last->next = new;
 }
 
-t_action *copy_actions(t_action *src) {
-    t_action *copy_head = NULL;
-    t_action **copy_tail = &copy_head;  // Pointer to the current tail's next pointer
-    t_action *curr = src;
+t_action	*copy_actions(t_action *src)
+{
+	t_action	*copy_head;
+	t_action	**copy_tail;
+	t_action	*node;
+	t_action	*curr;
 
-    while (curr) {
-        t_action *new_node = create_action(curr->name);
-        if (!new_node) {
-            free_actions(copy_head);
-            return NULL;
-        }
-        
-        *copy_tail = new_node;       // Link new node to list
-        copy_tail = &(*copy_tail)->next;  // Move tail pointer
-        curr = curr->next;
-    }
-    return copy_head;
+	copy_head = NULL;
+	copy_tail = &copy_head;
+	curr = src;
+	while (curr)
+	{
+		node = create_action(curr->name);
+		if (!node)
+		{
+			free_actions(copy_head);
+			return (NULL);
+		}
+		*copy_tail = node;
+		copy_tail = &(*copy_tail)->next;
+		curr = curr->next;
+	}
+	return (copy_head);
 }

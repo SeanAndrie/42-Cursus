@@ -6,76 +6,95 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:41:10 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 00:36:07 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:09:49 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_abs(int n)
+int	ft_abs(int n)
 {
-    if (n < 0)
-        return (-n);
-    return (n);
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
-int ft_clamp(int val, int min, int max)
+int	ft_clamp(int val, int min, int max)
 {
-    if (val < min)
-        return (min);
-    if (val > max)
-        return (max);
-    return (val);
+	if (val < min)
+		return (min);
+	if (val > max)
+		return (max);
+	return (val);
 }
 
-t_distribution distribution_init(t_stack *stack)
+t_distribution	analyse_distribution(t_stack *stack)
 {
-    t_distribution dist;
-    
-    dist.max = stack->head->data;
-    dist.min = stack->head->data;
-    dist.range = 0;
-    dist.is_reverse_sorted = 1;
-    return dist;
+	t_distribution	dist;
+	t_node			*curr;
+	int				prev;
+	int				gap;
+
+	ft_memset(&dist, 0, sizeof(t_distribution));
+	curr = stack->head;
+	if (!curr || !curr->next)
+		return (dist);
+	dist.is_reverse_sorted = 1;
+	dist.max_gap = 0;
+	prev = curr->data;
+	curr = curr->next;
+	while (curr)
+	{
+		gap = curr->data - prev;
+		if (gap != -1)
+			dist.is_reverse_sorted = 0;
+		dist.max_gap = ft_max(ft_abs(gap), dist.max_gap);
+		prev = curr->data;
+		curr = curr->next;
+	}
+	return (dist);
 }
 
-t_distribution analyse_distribution(t_stack *stack)
+int	calculate_base_chunk(t_distribution dist, int stack_size)
 {
-    int prev;
-    t_node *curr;
-    t_distribution dist;
+	int	chunks;
 
-    curr = stack->head;
-    if (!curr)
-        return ((t_distribution){0});
-    dist = distribution_init(stack);
-    prev = curr->data;
-    curr = curr->next;
-    while (curr)
-    {
-        dist.min = ft_min(dist.min, curr->data);
-        dist.max = ft_max(dist.max, curr->data);
-        if (prev < curr->data)
-            dist.is_reverse_sorted = 0;
-        prev = curr->data;
-        curr = curr->next;
-    }
-    dist.range = dist.max - dist.min;
-    return (dist);
+	if (stack_size <= 5)
+		return (stack_size);
+	if (dist.is_reverse_sorted)
+		return (3);
+	chunks = 5 + (stack_size / 20);
+	if (dist.max_gap <= stack_size / 4)
+		chunks--;
+	else if (dist.max_gap > stack_size / 2)
+		chunks++;
+	return (ft_clamp(chunks, 3, 15));
 }
 
-int calculate_chunks(t_distribution dist, int stack_size)
+int	*create_chunks(t_stack *stack, int base_chunk, int margin, int *size)
 {
-    int chunks;
+	int	i;
+	int	end;
+	int	start;
+	int	*chunks;
 
-    if (stack_size <= 5)
-        return (stack_size);
-    if (dist.is_reverse_sorted)
-        return (3);
-    chunks = 5 + (stack_size / 25);
-    if (dist.range < stack_size)
-        chunks--;
-    else if (dist.range > stack_size * 2)
-        chunks++;
-    return (ft_clamp(chunks, 3, 15));
+	if (!stack || margin <= 0)
+		return (NULL);
+	*size = 0;
+	start = ft_max(3, base_chunk - margin);
+	end = ft_min(base_chunk + margin, stack->size);
+	if (start > end)
+		return (NULL);
+	chunks = ft_calloc((end - start + 1), sizeof(int));
+	if (!chunks)
+		return (NULL);
+	i = 0;
+	while (i < (end - start + 1))
+	{
+		chunks[i] = start + i;
+		chunks[i] = ft_clamp(chunks[i], 3, stack->size);
+		(*size)++;
+		i++;
+	}
+	return (chunks);
 }

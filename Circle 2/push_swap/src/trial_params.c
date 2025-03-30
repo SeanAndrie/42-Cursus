@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:38:18 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 15:43:36 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 18:04:04 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void	trial_sort(t_push_swap *ps, int margin)
 	chunks = create_chunks(ps->stack_a, base_chunk, margin, &n_trials);
 	if (!chunks)
 		return ;
+	ft_printf("Chunks: ");
+	for (int i = 0; i < n_trials; i++)
+		ft_printf("%d ", chunks[i]);
+	ft_printf("\n");
 	optimal_actions = find_optimal_actions(ps, chunks, n_trials);
 	if (optimal_actions)
 	{

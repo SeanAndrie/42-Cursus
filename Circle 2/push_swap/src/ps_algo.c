@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:45:45 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 02:42:20 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:05:50 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	sort_three(t_stack *stack, t_action **actions)
 		rrotate(stack, actions);
 }
 
+void	partition_to_b(t_push_swap *ps, int *pushed)
+{
+	push(ps->stack_a, ps->stack_b, &ps->actions);
+	(*pushed)++;
+}
+
 void	process_chunk(t_push_swap *ps, int median, int chunk_size)
 {
 	int	pushed;
@@ -53,28 +59,18 @@ void	process_chunk(t_push_swap *ps, int median, int chunk_size)
 	while (pushed < chunk_size && ps->stack_a->size > 3)
 	{
 		if (ps->stack_a->head->data < median || init_size <= chunk_size)
-		{
-			push(ps->stack_a, ps->stack_b, &ps->actions);
-			pushed++;
-			rotated = 0;
-		}
+			partition_to_b(ps, &pushed);
 		else
 		{
 			rotate(ps->stack_a, &ps->actions);
 			rotated++;
 			if (rotated >= init_size)
-			{
-				push(ps->stack_a, ps->stack_b, &ps->actions);
-				pushed++;
-				rotated = 0;
-			}
+				partition_to_b(ps, &pushed);
 		}
 	}
 	if (ps->stack_a->size > 3)
-	{
 		while (rotated-- > 0)
 			rrotate(ps->stack_a, &ps->actions);
-	}
 }
 
 void	chunk_partitions(t_push_swap *ps, int n_chunks)
@@ -114,16 +110,4 @@ void	merge_chunks(t_push_swap *ps)
 	}
 	single_rotation(ps->stack_a, find_index(ps->stack_a,
 			stack_min(ps->stack_a)), &ps->actions);
-}
-
-void	sort(t_push_swap *ps, int n_chunks)
-{
-	// t_distribution dist;
-	// int chunks;
-
-	// dist = analyse_distribution(ps->stack_a);
-	// chunks = calculate_chunks(dist, ps->stack_a->size);
-	// ft_printf("N Chunks: %d\n\n", chunks);
-	chunk_partitions(ps, n_chunks);
-	merge_chunks(ps);
 }

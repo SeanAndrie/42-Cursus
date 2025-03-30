@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:44:26 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/22 02:02:25 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:13:48 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_stack	*stack_init(void)
 	stack->head = NULL;
 	stack->tail = NULL;
 	stack->size = 0;
-	stack->name = "\0";
+	stack->name = NULL;
 	return (stack);
 }
 

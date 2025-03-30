@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:57:12 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 02:34:35 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:18:57 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	*free_push_swap(t_push_swap *ps)
 
 t_push_swap	*push_swap_init(void)
 {
+	int			i;
 	t_push_swap	*ps;
 
 	ps = malloc(sizeof(t_push_swap));
@@ -46,23 +47,32 @@ t_push_swap	*push_swap_init(void)
 	ps->stack_a = NULL;
 	ps->stack_b = NULL;
 	ps->actions = NULL;
-	ft_memset(ps->lookup, 0, sizeof(t_hashmap *));
+	i = 0;
+	while (i < HASH_SIZE)
+		ps->lookup[i++] = NULL;
 	return (ps);
 }
 
-t_push_swap *partial_copy_push_swap(t_push_swap *ps)
+t_push_swap	*copy_init_state(t_push_swap *ps)
 {
-	t_push_swap *copy;
+	t_push_swap	*copy;
 
 	copy = push_swap_init();
 	if (!copy)
 		return (NULL);
 	copy->stack_a = stack_copy(ps->stack_a);
 	if (!copy->stack_a)
+	{
+		free_push_swap(copy);
 		return (NULL);
+	}
 	copy->stack_b = stack_init();
 	if (!copy->stack_b)
+	{
+		free_push_swap(copy);
 		return (NULL);
+	}
+	copy->stack_b->name = "b";
 	return (copy);
 }
 

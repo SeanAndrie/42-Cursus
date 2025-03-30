@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/28 03:11:36 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:10:22 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@
 
 # define HASH_SIZE 1500
 
-typedef	struct s_distribution
+typedef struct s_distribution
 {
-	int min;
-	int max;
-	int range;
-	int is_reverse_sorted;
-} t_distribution;
+	int					max_gap;
+	int					is_reverse_sorted;
+}						t_distribution;
 
 typedef struct s_candidate
 {
@@ -75,15 +73,20 @@ typedef struct s_push_swap
 	struct s_action		*actions;
 }						t_push_swap;
 
+// Trial Sort
+void					trial_sort(t_push_swap *ps, int margin);
+void					sort(t_push_swap *ps, int n_chunks);
+
 // Push Swap Initialization
 t_push_swap				*create_push_swap(int ac, char **av);
-t_push_swap				*partial_copy_push_swap(t_push_swap *ps);
+t_push_swap				*copy_init_state(t_push_swap *ps);
 t_push_swap				*push_swap_init(void);
 void					*free_push_swap(t_push_swap *ps);
 void					*full_free(char **tokens, t_stack *stack);
 
 // Push Swap Algorithm
-void					sort(t_push_swap *ps, int n_chunks);
+void					chunk_partitions(t_push_swap *ps, int n_chunks);
+void					merge_chunks(t_push_swap *ps);
 
 // Push Swap Algorithm Utilities
 t_rotation				find_rotations_to_top(t_stack *stack, int index);
@@ -117,7 +120,6 @@ int						find_index(t_stack *stack, int value);
 int						stack_min(t_stack *stack);
 int						stack_max(t_stack *stack);
 t_stack					*stack_copy(t_stack *stack);
-char					**stack_to_tokens(t_stack *stack);
 
 // Node Operations
 t_node					*create_node(int data);
@@ -154,7 +156,8 @@ void					combined_rotation(t_push_swap *ps, t_rotation *rot_a,
 							t_rotation *rot_b);
 
 // Analyze Distribution
-int						calculate_chunks(t_distribution dist, int stack_size);
+int						*create_chunks(t_stack *stack, int base_chunk, int margin, int *size);
+int						calculate_base_chunk(t_distribution dist, int stack_size);
 t_distribution			analyse_distribution(t_stack *stack);
 
 // Other Utilities

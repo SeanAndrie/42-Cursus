@@ -6,7 +6,7 @@
 #    By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 14:16:54 by sgadinga          #+#    #+#              #
-#    Updated: 2025/03/27 22:51:42 by sgadinga         ###   ########.fr        #
+#    Updated: 2025/03/30 17:17:12 by sgadinga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRCS = $(addprefix $(SRC_DIR)/, \
 		 stack_init.c stack_valid.c stack_utils.c stack_ops.c\
 		 ps_init.c ps_algo.c ps_utils.c \
 		 normalize.c other_utils.c debug.c \
-		 action_ops.c action_optim.c analyse_dist.c)
+		 action_ops.c action_optim.c analyse_dist.c \
+		 trial_params.c)
+		 
 BSRCS = $(addprefix $(BNS_DIR)/, checker.c)
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
