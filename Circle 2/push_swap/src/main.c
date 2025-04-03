@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:43:13 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 15:25:59 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:32:05 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 {
 	t_push_swap	*ps;
 
-	if (ac <= 2)
+	if (ac < 2)
 		return (0);
 	ps = create_push_swap(ac, av);
 	if (!ps)
