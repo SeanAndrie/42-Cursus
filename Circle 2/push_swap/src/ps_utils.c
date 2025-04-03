@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 23:20:49 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/31 17:20:08 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:37:35 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	find_insertion_point(t_stack *stack_a, int value)
 	if (value < min)
 		return (find_index(stack_a, min));
 	if (value > max)
-		return ((find_index(stack_a, max) + 1) % stack_a->size);
+		return (find_index(stack_a, max) + 1);
 	curr = stack_a->head;
 	index = 0;
 	while (curr->next)
