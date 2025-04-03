@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 17:10:22 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/01 19:16:12 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <stdlib.h>
 
 # define HASH_SIZE 1500
-
-typedef struct s_distribution
-{
-	int					max_gap;
-	int					is_reverse_sorted;
-}						t_distribution;
 
 typedef struct s_candidate
 {
@@ -76,6 +70,10 @@ typedef struct s_push_swap
 // Trial Sort
 void					trial_sort(t_push_swap *ps, int margin);
 void					sort(t_push_swap *ps, int n_chunks);
+
+// Mini Sort
+void					mini_sort(t_push_swap *ps);
+void					sort_three(t_stack *stack, t_action **actions);
 
 // Push Swap Initialization
 t_push_swap				*create_push_swap(int ac, char **av);
@@ -154,11 +152,6 @@ void					single_rotation(t_stack *stack, int index,
 							t_action **actions);
 void					combined_rotation(t_push_swap *ps, t_rotation *rot_a,
 							t_rotation *rot_b);
-
-// Analyze Distribution
-int						*create_chunks(t_stack *stack, int base_chunk, int margin, int *size);
-int						calculate_base_chunk(t_distribution dist, int stack_size);
-t_distribution			analyse_distribution(t_stack *stack);
 
 // Other Utilities
 int						ft_max(int a, int b);

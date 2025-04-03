@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:43:13 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 17:53:31 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:05:25 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	main(int ac, char **av)
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
-	trial_sort(ps, 5);
+	if (ps->stack_a->size <= 5)
+		mini_sort(ps);
+	else
+		trial_sort(ps, 8);
 	free_push_swap(ps);
 	return (0);
 }

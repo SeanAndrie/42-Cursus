@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:38:18 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 18:04:04 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/01 19:17:24 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,29 @@ void	sort(t_push_swap *ps, int n_chunks)
 {
 	chunk_partitions(ps, n_chunks);
 	merge_chunks(ps);
+}
+
+int	*create_chunks(int n_trials)
+{
+	int	i;
+	int	end;
+	int	start;
+	int	*chunks;
+
+	if (n_trials <= 0)
+		return (NULL);
+	start = 3;
+	end = n_trials + 3;
+	chunks = malloc(sizeof(int) * ((end - start) + 1));
+	if (!chunks)
+		return (NULL);
+	i = 0;
+	while (i < (end - start) + 1)
+	{
+		chunks[i] = start + i;
+		i++;
+	}
+	return (chunks);
 }
 
 void	validate_and_save(t_push_swap *copy, t_action **best_actions,
@@ -60,28 +83,19 @@ t_action	*find_optimal_actions(t_push_swap *ps, int *chunks, int n_trials)
 	return (best_actions);
 }
 
-void	trial_sort(t_push_swap *ps, int margin)
+void	trial_sort(t_push_swap *ps, int n_trials)
 {
 	int			*chunks;
-	int			n_trials;
-	int			base_chunk;
 	t_action	*optimal_actions;
 
-	base_chunk = calculate_base_chunk(analyse_distribution(ps->stack_a),
-			ps->stack_a->size);
-	chunks = create_chunks(ps->stack_a, base_chunk, margin, &n_trials);
+	chunks = create_chunks(n_trials);
 	if (!chunks)
 		return ;
-	ft_printf("Chunks: ");
-	for (int i = 0; i < n_trials; i++)
-		ft_printf("%d ", chunks[i]);
-	ft_printf("\n");
 	optimal_actions = find_optimal_actions(ps, chunks, n_trials);
 	if (optimal_actions)
 	{
 		ps->actions = optimal_actions;
 		print_actions(ps->actions);
-		ft_printf("\nNumber of Operations: %d\n", count_actions(ps->actions));
 	}
 	free(chunks);
 }

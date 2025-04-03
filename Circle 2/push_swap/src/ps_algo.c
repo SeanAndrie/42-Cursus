@@ -6,40 +6,11 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:45:45 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 17:05:50 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:54:03 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	sort_three(t_stack *stack, t_action **actions)
-{
-	int	a;
-	int	b;
-	int	c;
-
-	a = stack->head->data;
-	b = stack->head->next->data;
-	c = stack->head->next->next->data;
-	if (a < b && b < c)
-		return ;
-	if (a > b && a < c)
-		swap(stack, actions);
-	else if (a > b && b > c)
-	{
-		swap(stack, actions);
-		rrotate(stack, actions);
-	}
-	else if (a > c && b < c)
-		rotate(stack, actions);
-	else if (a < c && b > c)
-	{
-		swap(stack, actions);
-		rotate(stack, actions);
-	}
-	else
-		rrotate(stack, actions);
-}
 
 void	partition_to_b(t_push_swap *ps, int *pushed)
 {

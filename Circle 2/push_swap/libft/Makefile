@@ -6,7 +6,7 @@
 #    By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/25 18:51:11 by sgadinga          #+#    #+#              #
-#    Updated: 2025/03/14 14:26:25 by sgadinga         ###   ########.fr        #
+#    Updated: 2025/03/31 16:11:29 by sgadinga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 SRC_DIR = src
 OBJ_DIR = obj
+GNL_DIR = $(SRC_DIR)/get_next_line
 PRINTF_DIR = $(SRC_DIR)/ft_printf
 
+GNL_UTILS = $(GNL_DIR)/get_next_line_utils.c
 PRINTF_UTILS = $(addprefix $(PRINTF_DIR)/, \
 			     ft_format_parsers.c ft_format_spec.c \
 				 ft_format_utils.c ft_print_char.c \
@@ -36,23 +38,14 @@ SRCS = $(addprefix $(SRC_DIR)/, \
 	   	 ft_strlen.c ft_strmapi.c ft_strncmp.c \
 	   	 ft_strnstr.c ft_strrchr.c ft_strtrim.c \
 	   	 ft_substr.c ft_tolower.c ft_toupper.c \
-	   	 ft_printf.c) $(PRINTF_UTILS)
-
-BNS = $(addprefix $(SRC_DIR)/, \
-		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-		ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-		ft_lstsize.c ft_lstnew.c ft_lstmap.c)
+	   	 ft_printf.c get_next_line.c) $(PRINTF_UTILS) $(GNL_UTILS)
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-BOBJS = $(BNS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS) $(BOBJS)
-	@ar rcs $(NAME) $(OBJS) $(BOBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

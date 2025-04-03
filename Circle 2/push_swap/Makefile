@@ -6,7 +6,7 @@
 #    By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 14:16:54 by sgadinga          #+#    #+#              #
-#    Updated: 2025/03/30 17:17:12 by sgadinga         ###   ########.fr        #
+#    Updated: 2025/04/03 13:59:55 by sgadinga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,23 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Ilibft/includes -Iincludes
 
 SRC_DIR = src
-BNS_DIR = bonus
 OBJ_DIR = obj
 
 SRCS = $(addprefix $(SRC_DIR)/, \
 		 main.c node_ops.c map_ops.c rotations.c \
 		 stack_init.c stack_valid.c stack_utils.c stack_ops.c\
-		 ps_init.c ps_algo.c ps_utils.c \
+		 ps_init.c ps_algo.c ps_utils.c mini_sort.c \
 		 normalize.c other_utils.c debug.c \
-		 action_ops.c action_optim.c analyse_dist.c \
+		 action_ops.c action_optim.c \
 		 trial_params.c)
-		 
-BSRCS = $(addprefix $(BNS_DIR)/, checker.c)
+BNS = $(addprefix $(SRC_DIR)/, \
+		checker.c node_ops.c map_ops.c rotations.c \
+		stack_init.c stack_valid.c stack_ops.c stack_utils.c\
+		ps_init.c debug.c other_utils.c normalize.c \
+		action_ops.c action_optim.c) 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-BOBJS = $(BSRCS:$(BNS_DIR)/%.c=$(OBJ_DIR)/%.o)
+BOBJS = $(BNS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: libft $(NAME)
 
@@ -42,6 +44,7 @@ libft:
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -Llibft -lft
 
+
 $(BNS_NAME): $(BOBJS)
 	$(CC) $(CFLAGS) -o $(BNS_NAME) $(BOBJS) -Llibft -lft
 
@@ -49,15 +52,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(BNS_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
 	@rm -rf $(OBJ_DIR)
+	@make -C libft clean
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BNS_NAME)
 	@make -C libft fclean
 
 re: fclean all
