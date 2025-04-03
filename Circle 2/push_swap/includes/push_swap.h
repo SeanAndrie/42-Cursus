@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 15:55:58 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:34:12 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <stdlib.h>
 
-# define HASH_SIZE 1500
+# define HASH_SIZE 1024
 
 typedef struct s_candidate
 {
@@ -158,7 +158,8 @@ void					combined_rotation(t_push_swap *ps, t_rotation *rot_a,
 // Other Utilities
 int						ft_max(int a, int b);
 int						ft_min(int a, int b);
-long					ft_atol(const char *s);
+// long					ft_atol(const char *s);
+int						ft_atoi_safe(const char *s, int *overflow);
 void					ft_swap(int *a, int *b);
 int						*stack_to_arr(t_stack *stack);
 

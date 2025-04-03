@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 22:54:03 by sgadinga          #+#    #+#             */
-/*   Updated: 2024/12/26 17:33:37 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:56:45 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static int	check_overflow(int n, char digit, int sign)
 {
-	if (n == (2147483647 / 10) || (n == (2147483647 / 10) && (digit - '0') > 7))
-	{
-		if (sign == 1)
-			return (2147483647);
-		else
-			return (-2147483648);
-	}
+	int	next_digit;
+
+	next_digit = digit - '0';
+	if (sign == 1 && (n > INT_MAX / 10 || (n == INT_MAX / 10
+				&& next_digit > INT_MAX % 10)))
+		return (INT_MAX);
+	if (sign == -1 && (n > -(INT_MIN / 10) || (n == -(INT_MIN / 10)
+				&& next_digit > -(INT_MIN % 10))))
+		return (INT_MIN);
 	return (0);
 }
 

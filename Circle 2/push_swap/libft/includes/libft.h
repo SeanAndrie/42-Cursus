@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:03:33 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/31 16:02:03 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:47:04 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 char				*get_next_line(int fd);
 

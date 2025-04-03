@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:47:15 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/23 08:43:38 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:05:06 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ void	ft_swap(int *a, int *b)
 	*b = temp;
 }
 
-long	ft_atol(const char *s)
+int	ft_atoi_safe(const char *s, int *overflow)
 {
 	long	res;
-	long	sign;
+	int		sign;
 
 	res = 0;
 	sign = 1;
+	*overflow = 0;
 	while ((*s >= 9 && *s <= 13) || *s == 32)
 		s++;
 	if (*s == '-' || *s == '+')
@@ -72,6 +73,11 @@ long	ft_atol(const char *s)
 		s++;
 	}
 	while (*s && ft_isdigit(*s))
-		res = res * 10 + *s++ - '0';
-	return (sign * res);
+	{
+		res = res * 10 + (*s - '0');
+		if ((sign == 1 && res > INT_MAX) || (sign == -1 && (-res) < INT_MIN))
+			return (*overflow = 1, 0);
+		s++;
+	}
+	return ((int)(res * sign));
 }

@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:44:26 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 15:18:47 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:06:43 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ t_stack	*stack_init(void)
 
 t_stack	*create_stack(char **tokens, char *stack_name)
 {
-	long	n;
+	int		n;
 	t_node	*node;
 	t_stack	*stack;
+	int		overflow;
 
 	stack = stack_init();
 	if (!stack)
@@ -86,12 +87,10 @@ t_stack	*create_stack(char **tokens, char *stack_name)
 	stack->name = stack_name;
 	while (*tokens)
 	{
-		if (!is_valid_int(*tokens))
+		n = ft_atoi_safe(*tokens, &overflow);
+		if (overflow || !is_valid_int(*tokens))
 			return (free_stack(stack));
-		n = ft_atol(*tokens);
-		if (n > INT_MAX || n < INT_MIN)
-			return (free_stack(stack));
-		node = create_node((int)n);
+		node = create_node(n);
 		if (!node)
 			return (free_stack(stack));
 		append(stack, node);
