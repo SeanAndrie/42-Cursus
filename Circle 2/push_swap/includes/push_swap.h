@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/01 19:16:12 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:23:14 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_push_swap
 	struct s_hashmap	*lookup[HASH_SIZE];
 	struct s_action		*actions;
 }						t_push_swap;
+
+void					error(void);
 
 // Trial Sort
 void					trial_sort(t_push_swap *ps, int margin);

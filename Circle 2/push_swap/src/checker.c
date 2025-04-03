@@ -6,19 +6,13 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:52:09 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/31 20:26:00 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:23:23 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error(void)
-{
-	ft_putendl_fd("Error", 2);
-	exit(1);
-}
-
-void	parse_actions(t_push_swap *ps, char *action)
+static void	parse_actions(t_push_swap *ps, char *action)
 {
 	if (!ft_strncmp(action, "sa\n", 3))
 		swap(ps->stack_a, &ps->actions);
@@ -65,7 +59,7 @@ int	main(int ac, char **av)
 	t_push_swap	*ps;
 	int			init_size;
 
-	if (ac < 2)
+	if (ac <= 2)
 		return (0);
 	ps = create_push_swap(ac, av);
 	if (!ps)

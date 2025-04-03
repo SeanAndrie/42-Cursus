@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:44:26 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/03/30 17:13:48 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:18:47 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_stack	*create_stack(char **tokens, char *stack_name)
 		stack->size++;
 		tokens++;
 	}
-	if (has_duplicates(stack) || is_sorted(stack))
+	if (has_duplicates(stack))
 		return (free_stack(stack));
 	return (stack);
 }
