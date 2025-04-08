@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:44:26 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/04 00:06:43 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:33:55 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ char	**create_tokens(int ac, char **av)
 	char	**tokens;
 	int		i;
 
+	tokens = NULL;
 	if (ac == 2)
 		tokens = ft_split(av[1], ' ');
-	else if (ac >= 2)
+	else if (ac > 2)
 	{
 		tokens = ft_calloc(ac + 1, sizeof(char *));
 		if (!tokens)
