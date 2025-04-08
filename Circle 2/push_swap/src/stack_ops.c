@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_ops.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 01:12:13 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 16:16:30 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:40:10 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	rrotate(t_stack *stack, t_action **actions)
 
 	if (!stack || stack->size < 2)
 		return ;
-	if (actions)
-		name = ft_strjoin("rr", stack->name);
+	name = ft_strjoin("rr", stack->name);
 	if (!name)
 		return ;
 	last = stack->tail;

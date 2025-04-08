@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/04 02:34:12 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:41:52 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ typedef struct s_push_swap
 	struct s_action		*actions;
 }						t_push_swap;
 
-void					error(void);
-
 // Trial Sort
 void					trial_sort(t_push_swap *ps, int margin);
 void					sort(t_push_swap *ps, int n_chunks);
@@ -114,6 +112,7 @@ void					combined_operation(t_push_swap *ps, char *name);
 int						has_duplicates(t_stack *stack);
 int						is_valid_int(char *token);
 int						is_sorted(t_stack *stack);
+int						error(void);
 
 // Stack Utilities
 int						find_index(t_stack *stack, int value);

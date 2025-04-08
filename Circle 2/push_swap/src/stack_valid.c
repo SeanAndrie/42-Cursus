@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_valid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:02:28 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 23:03:57 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:40:54 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ int	has_duplicates(t_stack *stack)
 	}
 	free_map(map);
 	return (0);
+}
+
+int	error(void)
+{
+	ft_putendl_fd("Error", 2);
+	return (1);
 }

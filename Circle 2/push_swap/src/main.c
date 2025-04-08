@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:43:13 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/03 15:32:05 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:42:05 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	error(void)
-{
-	ft_putendl_fd("Error", 2);
-	exit(1);
-}
 
 int	main(int ac, char **av)
 {
@@ -26,7 +20,7 @@ int	main(int ac, char **av)
 		return (0);
 	ps = create_push_swap(ac, av);
 	if (!ps)
-		error();
+		return (error());
 	if (is_sorted(ps->stack_a))
 	{
 		free_push_swap(ps);
