@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 00:32:19 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/08 23:41:52 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:50:04 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void					combined_operation(t_push_swap *ps, char *name);
 int						has_duplicates(t_stack *stack);
 int						is_valid_int(char *token);
 int						is_sorted(t_stack *stack);
-int						error(void);
+void					error(void);
 
 // Stack Utilities
 int						find_index(t_stack *stack, int value);
@@ -157,7 +157,6 @@ void					combined_rotation(t_push_swap *ps, t_rotation *rot_a,
 // Other Utilities
 int						ft_max(int a, int b);
 int						ft_min(int a, int b);
-// long					ft_atol(const char *s);
 int						ft_atoi_safe(const char *s, int *overflow);
 void					ft_swap(int *a, int *b);
 int						*stack_to_arr(t_stack *stack);

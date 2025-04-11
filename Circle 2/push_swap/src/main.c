@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:43:13 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/08 23:42:05 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:50:13 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 		return (0);
 	ps = create_push_swap(ac, av);
 	if (!ps)
-		return (error());
+		error();
 	if (is_sorted(ps->stack_a))
 	{
 		free_push_swap(ps);
