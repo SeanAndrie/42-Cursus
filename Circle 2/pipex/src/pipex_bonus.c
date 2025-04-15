@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac < 5)
 	{
-		error("pipex", "usage: ./pipex infile cmd1 cmd2 ... outfile or\n");
+		error("pipex", "usage: ./pipex infile cmd1 cmd2 ... outfile\nor\n./pipex here_doc LIMITER cmd1 ... outfile\n");
 		exit(1);
 	}
 	px = init_pipex(ac, av);

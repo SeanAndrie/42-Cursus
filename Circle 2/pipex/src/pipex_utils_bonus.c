@@ -81,7 +81,7 @@ t_pipex	*init_pipex(int ac, char **av)
 		error("pipex", "infile: No such file or directory.");
 		px->infile = open("/dev/null", O_RDONLY);
 		if (px->infile < 0)
-			error("pipex", "infile: Fallback failed.");
+			error("pipex", "infile: /dev/null fallback failed.");
 	}
 	if (px->outfile < 0)
 		return (error("pipex (outfile)", "permission denied."), free_pipex(px));
