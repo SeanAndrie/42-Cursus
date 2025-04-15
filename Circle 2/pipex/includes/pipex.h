@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:21:33 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/11 13:28:05 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:14:27 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
+void					error(char *type, char *message);
+
+// here_doc
+int						process_heredoc(char *limiter);
+void					heredoc_params(t_pipex *px, int *ac, char ***av);
+
 // Pipe Execution
 void					run_pipex(t_pipex *px, char **envp);
 
@@ -51,7 +57,6 @@ void					*free_pipex(t_pipex *px);
 t_pipex					*init_pipex(int ac, char **av);
 
 // Path Utilities
-int						requires_shell_parsing(char *cmd);
 void					*free_array(char **array);
 char					*find_path(char **envp);
 char					*ft_strjoinv(int n, ...);

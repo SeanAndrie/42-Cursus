@@ -6,11 +6,19 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:12:14 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/11 13:45:02 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:34:44 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	error(char *type, char *message)
+{
+	ft_putstr_fd(type, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(message, 2);
+	exit(EXIT_FAILURE);
+}
 
 void	wait_for_children(int n_cmds)
 {
@@ -24,37 +32,27 @@ void	wait_for_children(int n_cmds)
 	}
 }
 
-void	execute_w_execve(char *cmd, char **envp)
+int	execute_w_execve(char *cmd, char **envp)
 {
 	char	**args;
 	char	*cmd_path;
 
 	if (!cmd || !envp)
-		return ;
+		return (0);
 	args = ft_split(cmd, ' ');
 	if (!args)
-		return ;
+		return (0);
 	cmd_path = find_cmd_path(args[0], envp);
 	if (!cmd_path)
 	{
 		free_array(args);
-		return ;
+		return (0);
 	}
-	execve(cmd_path, args, envp);
+	if (execve(cmd_path, args, envp) == -1)
+		return (0);
 	free(cmd_path);
 	free_array(args);
-}
-
-void	execute_w_shell(char *cmd, char **envp)
-{
-	char	*args[4];
-
-	args[0] = "/bin/sh";
-	args[1] = "-c";
-	args[2] = cmd;
-	args[3] = NULL;
-	execve("/bin/sh", args, envp);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
 void	child_process(t_pipex *px, t_command *node, char **envp, int i)
@@ -68,10 +66,11 @@ void	child_process(t_pipex *px, t_command *node, char **envp, int i)
 	else
 		dup2(px->outfile, STDOUT_FILENO);
 	close_pipes(px->pipes, px->n_cmds);
-	if (requires_shell_parsing(node->cmd))
-		execute_w_shell(node->cmd, envp);
-	else
-		execute_w_execve(node->cmd, envp);
+	if (!execute_w_execve(node->cmd, envp))
+	{
+		free_pipex(px);
+		error("Pipex", "Command execution failed.");
+	}
 }
 
 void	run_pipex(t_pipex *px, char **envp)

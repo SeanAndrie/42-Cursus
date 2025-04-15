@@ -6,22 +6,11 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 18:23:34 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/11 13:43:32 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/14 23:50:15 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	requires_shell_parsing(char *cmd)
-{
-	while (*cmd)
-	{
-		if (ft_strchr("'\"$|;&*?[]()\\", *cmd))
-			return (1);
-		cmd++;
-	}
-	return (0);
-}
 
 void	*free_array(char **array)
 {

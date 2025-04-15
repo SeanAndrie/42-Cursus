@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 15:39:48 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 03:30:11 by sgadinga         ###   ########.fr       */
+/*   Created: 2025/04/15 03:29:05 by sgadinga          #+#    #+#             */
+/*   Updated: 2025/04/15 13:12:58 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,15 @@ t_pipex	*init_pipex(int ac, char **av)
 	px = malloc(sizeof(t_pipex));
 	if (!px)
 		return (NULL);
-	px->infile = open(av[1], O_RDONLY);
+	if (!ft_strncmp(av[1], "here_doc", 9))
+		heredoc_params(px, &ac, &av);
+	else
+	{
+		px->infile = open(av[1], O_RDONLY);
+		px->outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0633);
+	}
 	if (px->infile < 0)
 		return (error("Pipex", "infile error."), free_pipex(px));
-	px->outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0633);
 	if (px->outfile < 0)
 		return (error("pipex", "outfile error."), free_pipex(px));
 	px->head = create_cmd_list(ac, av);
