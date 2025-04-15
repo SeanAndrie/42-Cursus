@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 00:57:27 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 17:17:46 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 20:46:36 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac < 5)
 	{
-		error("pipex", "usage: ./pipex infile cmd1 cmd2 ... outfile\nor\n./pipex here_doc LIMITER cmd1 ... outfile\n");
+		ft_putstr_fd("pipex: usage:\n./pipex infile cmd1 cmd2 ... outfile\n", 2);
+		ft_putstr_fd("or\n./pipex here_doc LIMITER cmd1 ... outfile\n", 2);
 		exit(1);
 	}
 	px = init_pipex(ac, av);
