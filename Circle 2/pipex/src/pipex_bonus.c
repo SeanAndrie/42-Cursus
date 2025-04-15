@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 00:57:27 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 14:44:30 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:17:46 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,20 @@ int	process_heredoc(char *limiter)
 	return (fd[0]);
 }
 
-void	heredoc_params(t_pipex *px, int *ac, char ***av)
+void	normal_or_heredoc(t_pipex *px, int *ac, char ***av)
 {
-	px->infile = process_heredoc((*av)[2]);
-	px->outfile = open((*av)[*ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-	(*ac)--;
-	(*av)++;
+	if (!ft_strncmp((*av)[1], "here_doc", 9))
+	{
+		px->infile = process_heredoc((*av)[2]);
+		px->outfile = open((*av)[*ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		(*ac)--;
+		(*av)++;
+	}
+	else
+	{
+		px->infile = open((*av)[1], O_RDONLY);
+		px->outfile = open((*av)[*ac - 1], O_WRONLY | O_CREAT | O_APPEND);
+	}
 }
 
 int	main(int ac, char **av, char **envp)

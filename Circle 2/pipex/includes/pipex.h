@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:21:33 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 14:28:49 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:17:29 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void					error(char *type, char *message);
 
 // here_doc
 int						process_heredoc(char *limiter);
-void					heredoc_params(t_pipex *px, int *ac, char ***av);
+void					normal_or_heredoc(t_pipex *px, int *ac, char ***av);
 
 // Pipe Execution
 void					run_pipex(t_pipex *px, char **envp);
@@ -49,7 +49,7 @@ void					run_pipex(t_pipex *px, char **envp);
 // Command Operations
 int     				count_cmds(t_command *head);
 void					free_cmds(t_command *head);
-t_command				*create_cmd_list(char ac, char **av);
+t_command				*create_cmd_list(int ac, char **av);
 
 // Pipex Utilies
 void					free_pipes(int **pipes, int n_cmds);

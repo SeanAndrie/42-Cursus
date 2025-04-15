@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:24:08 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/11 00:29:11 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:04:51 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	count_cmds(t_command *head)
 	return (count);
 }
 
-t_command	*create_cmd_list(char ac, char **av)
+t_command	*create_cmd_list(int ac, char **av)
 {
 	int			i;
 	t_command	*head;

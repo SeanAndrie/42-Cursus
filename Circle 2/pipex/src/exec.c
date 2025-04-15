@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:12:14 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 14:42:07 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:21:35 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ void	run_pipex(t_pipex *px, char **envp)
 	{
 		pid = fork();
 		if (pid < 0)
-			return ;
+		{
+			error("pipex", "fork failed");
+			free_pipex(px);
+			exit(1);
+		}
 		else if (pid == 0)
 			child_process(px, curr, envp, i);
 		curr = curr->next;

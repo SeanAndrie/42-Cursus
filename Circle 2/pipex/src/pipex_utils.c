@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:39:48 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 15:34:25 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:09:55 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ t_pipex	*init_pipex(int ac, char **av)
 	px->infile = open(av[1], O_RDONLY);
 	if (px->infile < 0)
 	{
-		perror(av[1]);
+		error("pipex", "infile: No such file or directory.");
 		px->infile = open("/dev/null", O_RDONLY);
 		if (px->infile < 0)
-			return (error("pipex", "infile: infile fallback error."), free_pipex(px));
+			error("pipex", "infile: Fallback failed.");
 	}
 	px->outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0633);
 	if (px->outfile < 0)
-		return(error("pipex", "outfile: No such file or directory."), free_pipex(px));
+		return (error("pipex", "outfile: No such file or directory."),
+			free_pipex(px));
 	px->head = create_cmd_list(ac, av);
 	if (!px->head)
 		return (error("pipex", "command list error."), free_pipex(px));
