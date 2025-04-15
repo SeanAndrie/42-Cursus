@@ -17,11 +17,14 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	*px;
 
 	if (ac < 5)
-		error("Usage", "./pipex infile cmd1 cmd2 ... outfile", 1);
+	{
+		error("pipex", "usage: ./pipex infile cmd1 cmd2 ... outfile");
+		exit(1);
+	}
 	px = init_pipex(ac, av);
 	if (!px)
 		return (1);
 	run_pipex(px, envp);
 	free_pipex(px);
-	return (0);
+	exit(0);
 }

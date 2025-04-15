@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_pipex
 {
@@ -36,7 +37,7 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-void					error(char *type, char *message, int code);
+void					error(char *type, char *message);
 
 // here_doc
 int						process_heredoc(char *limiter);

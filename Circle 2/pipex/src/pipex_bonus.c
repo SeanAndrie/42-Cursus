@@ -19,7 +19,7 @@ int	process_heredoc(char *limiter)
 	size_t	limit_len;
 
 	if (pipe(fd) == -1)
-		return (error("here_doc", "pipe creation failed.", 1), -1);
+		return (error("here_doc", "pipe creation failed."), -1);
 	limit_len = ft_strlen(limiter);
 	while (1)
 	{
@@ -51,11 +51,14 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	*px;
 
 	if (ac < 5)
-		error("Usage", "./pipex infile cmd1 cmd2 ... outfile or\n", 1);
+	{
+		error("pipex", "usage: ./pipex infile cmd1 cmd2 ... outfile or\n");
+		exit(1);
+	}
 	px = init_pipex(ac, av);
 	if (!px)
 		return (1);
 	run_pipex(px, envp);
 	free_pipex(px);
-	return (0);
+	exit(0);
 }

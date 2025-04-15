@@ -56,13 +56,19 @@ int	**create_pipes(int n_cmds)
 
 	pipes = malloc(sizeof(int *) * (n_cmds - 1));
 	if (!pipes)
-		error("pipex", "pipe malloc failed.", 1);
+	{
+		error("pipex", "pipe malloc failed.");
+		exit(1);
+	}
 	i = 0;
 	while (i < n_cmds - 1)
 	{
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i] || pipe(pipes[i]) == -1)
-			error("pipex", "pipe creation failed.", 1);
+		{
+			error("pipex", "pipe creation failed.");
+			exit(1);
+		}
 		i++;
 	}
 	return (pipes);
@@ -77,13 +83,18 @@ t_pipex	*init_pipex(int ac, char **av)
 		return (NULL);
 	px->infile = open(av[1], O_RDONLY);
 	if (px->infile < 0)
-		return (error("pipex (infile)", "permission denied.", 1), free_pipex(px));
+	{
+		perror(av[1]);
+		px->infile = open("/dev/null", O_RDONLY);
+		if (px->infile < 0)
+			return (error("pipex", "infile: infile fallback error."), free_pipex(px));
+	}
 	px->outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0633);
 	if (px->outfile < 0)
-		return (error("pipex (outfile)", "permission denied.", 1), free_pipex(px));
+		return(error("pipex", "outfile: No such file or directory."), free_pipex(px));
 	px->head = create_cmd_list(ac, av);
 	if (!px->head)
-		return (error("pipex", "command list error.", 1), free_pipex(px));
+		return (error("pipex", "command list error."), free_pipex(px));
 	px->n_cmds = count_cmds(px->head);
 	px->pipes = create_pipes(px->n_cmds);
 	if (!px->pipes)

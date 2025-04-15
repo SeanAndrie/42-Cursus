@@ -62,7 +62,7 @@ int	**create_pipes(int n_cmds)
 	{
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i] || pipe(pipes[i]) == -1)
-			return (error("pipex", "pipe/s creation failed.", 1), NULL);
+			return (error("pipex", "pipe/s creation failed."), NULL);
 		i++;
 	}
 	return (pipes);
@@ -83,9 +83,9 @@ t_pipex	*init_pipex(int ac, char **av)
 		px->outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0633);
 	}
 	if (px->infile < 0)
-		return (error("pipex (infile)", "permission denied.", 1), free_pipex(px));
+		return (error("pipex (infile)", "permission denied."), free_pipex(px));
 	if (px->outfile < 0)
-		return (error("pipex (outfile)", "permission denied.", 1), free_pipex(px));
+		return (error("pipex (outfile)", "permission denied."), free_pipex(px));
 	px->head = create_cmd_list(ac, av);
 	if (!px->head)
 		return (free_pipex(px));

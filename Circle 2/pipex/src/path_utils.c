@@ -88,7 +88,7 @@ char	*find_cmd_path(char *cmd, char **envp)
 	{
 		full_path = ft_strjoinv(3, array[i], "/", cmd);
 		if (!full_path)
-			return (error("pipex", "command not found", 2), free_array(array));
+			return (error("pipex", "command not found"), free_array(array));
 		if (access(full_path, X_OK) == 0)
 			return (free_array(array), full_path);
 		free(full_path);
