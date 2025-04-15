@@ -6,18 +6,18 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:12:14 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 13:47:13 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:42:07 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error(char *type, char *message)
+void	error(char *type, char *message, int code)
 {
 	ft_putstr_fd(type, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(message, 2);
-	exit(EXIT_FAILURE);
+	exit(code);
 }
 
 void	wait_for_children(int n_cmds)
@@ -69,7 +69,7 @@ void	child_process(t_pipex *px, t_command *node, char **envp, int i)
 	if (!execute_w_execve(node->cmd, envp))
 	{
 		free_pipex(px);
-		error("Pipex", "Command execution failed.");
+		error("pipex", "command execution failed.", 1);
 	}
 }
 

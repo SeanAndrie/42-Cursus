@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 18:23:34 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/14 23:50:15 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:52:34 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*find_cmd_path(char *cmd, char **envp)
 	{
 		full_path = ft_strjoinv(3, array[i], "/", cmd);
 		if (!full_path)
-			return (free_array(array));
+			return (error("pipex", "command not found", 2), free_array(array));
 		if (access(full_path, X_OK) == 0)
 			return (free_array(array), full_path);
 		free(full_path);

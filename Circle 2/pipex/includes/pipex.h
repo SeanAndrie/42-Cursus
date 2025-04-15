@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:21:33 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 13:14:27 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:28:49 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-void					error(char *type, char *message);
+void					error(char *type, char *message, int code);
 
 // here_doc
 int						process_heredoc(char *limiter);

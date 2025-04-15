@@ -6,7 +6,7 @@
 /*   By: sgadinga <sgadinga@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 00:57:27 by sgadinga          #+#    #+#             */
-/*   Updated: 2025/04/15 13:47:16 by sgadinga         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:44:30 by sgadinga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	process_heredoc(char *limiter)
 	size_t	limit_len;
 
 	if (pipe(fd) == -1)
-		return (error("here_doc", "pipe creation failed."), -1);
+		return (error("here_doc", "pipe creation failed.", 1), -1);
 	limit_len = ft_strlen(limiter);
 	while (1)
 	{
@@ -51,10 +51,7 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	*px;
 
 	if (ac < 5)
-	{
-		error("Usage", "./pipex infile cmd1 cmd2 ... outfile or\n");
-		return (1);
-	}
+		error("Usage", "./pipex infile cmd1 cmd2 ... outfile or\n", 1);
 	px = init_pipex(ac, av);
 	if (!px)
 		return (1);
