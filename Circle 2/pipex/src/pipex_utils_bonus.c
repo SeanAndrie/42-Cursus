@@ -78,16 +78,16 @@ t_pipex	*init_pipex(int ac, char **av)
 	normal_or_heredoc(px, &ac, &av);
 	if (px->infile < 0)
 	{
-		error("pipex", "infile: No such file or directory.");
+		perror(av[1]);
 		px->infile = open("/dev/null", O_RDONLY);
 		if (px->infile < 0)
-			error("pipex", "infile: /dev/null fallback failed.");
+			error("infile", "Fallback failed.");
 	}
 	if (px->outfile < 0)
-		return (error("pipex (outfile)", "permission denied."), free_pipex(px));
+		return (perror(av[ac - 1]), free_pipex(px));
 	px->head = create_cmd_list(ac, av);
 	if (!px->head)
-		return (free_pipex(px));
+		return (error("pipex", "command list error."), free_pipex(px));
 	px->n_cmds = count_cmds(px->head);
 	px->pipes = create_pipes(px->n_cmds);
 	if (!px->pipes)
