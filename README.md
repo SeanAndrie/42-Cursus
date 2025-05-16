@@ -1,10 +1,15 @@
-# 42-Cursus
-A collection of my completed projects from the 42 School curriculum, covering systems programming, algorithms, and low-level programming development. 
+<h1 align="center">42 Cursus</h1>
+<p align="center">
+ This portfolio showcases a collection of my completed projects from the 42 School curriculum, reflecting my hands-on experience in systems programming, algorithm design, and low-level software development. Each project demonstrates practical application of computer science fundamentals, including memory management, process control, data structures, and performance optimization, built entirely without relying on external libraries.
+</p>
 
 <h1 align="center">Common Core</h1>
+<p align="center">
+The 42 Common Core is the foundational phase of the 42 School curriculum. It is designed to develop strong programming fundamentals, problem-solving skills, and the ability to work independently in a peer-driven environment. 
+</p>
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><code>libft</code></td>
+    <td><a href="https://github.com/SeanAndrie/libft/tree/main"><code>libft</code></a></td>
   </tr>
   <tr>
     <td>
@@ -18,8 +23,8 @@ A collection of my completed projects from the 42 School curriculum, covering sy
 
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><code>ft_printf</code></td>
-    <td><code>get_next_line</code></td>
+    <td><a href="https://github.com/SeanAndrie/ft_printf/tree/main"><code>ft_printf</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/get_next_line/tree/main"><code>get_next_line</code></a></td>
     <td><code>born2beroot</code></td>
   </tr>
   <tr>
@@ -42,9 +47,9 @@ A collection of my completed projects from the 42 School curriculum, covering sy
 
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><code>push_swap</code></td>
-    <td><code>FdF (Fil de Fer)</code></td>
-    <td><code>pipex</code></td>
+    <td><a href="https://github.com/SeanAndrie/push_swap/tree/main"><code>push_swap</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/FdF/tree/main"><code>FdF (Fil de Fer)</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/pipex/tree/main"><code>pipex</code></a></td>
   </tr>
   <tr>
     <td>
@@ -60,6 +65,6 @@ A collection of my completed projects from the 42 School curriculum, covering sy
   <tr align="center">
     <td><b> 🟢 | 125/100</b></td>
     <td><b> 🟢 | 125/100</b></td>
-    <td><b> 〇 | N/A</b></td>
+    <td><b> 🚧 | Pending Eval. </b></td>
   </tr>
 </table>
