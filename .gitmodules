@@ -10,9 +10,9 @@
 [submodule "push_swap"]
 	path = push_swap
 	url = git@github.com:SeanAndrie/push_swap.git
-[submodule "pipex"]
-	path = pipex
-	url = git@github.com:SeanAndrie/pipex.git
 [submodule "FdF"]
 	path = FdF
 	url = git@github.com:SeanAndrie/FdF.git
+[submodule "pipex"]
+	path = pipex
+	url = git@github.com:SeanAndrie/pipex.git
