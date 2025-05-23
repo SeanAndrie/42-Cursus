@@ -16,3 +16,6 @@
 [submodule "pipex"]
 	path = pipex
 	url = git@github.com:SeanAndrie/pipex.git
+[submodule "philosophers"]
+	path = philosophers
+	url = git@github.com:SeanAndrie/philosophers.git
