@@ -67,3 +67,22 @@
     <td><b> ✅ | 125/100</b></td>
   </tr>
 </table>
+
+<table style="text-align:center;" align="center">
+  <tr align="center">
+    <td><a><code>philosophers</code></a></td>
+    <td><a><code>minishell</code></a></td>
+  </tr>
+  <tr>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/philosophersm.png"/></p>
+    </td>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/minishellm.png"/></p>
+    </td>
+  </tr>
+  <tr align="center">
+    <td><b> 🚧 | In Progress</b></td>
+    <td><b> 🚧 | In Progress</b></td>
+  </tr>
+</table>
