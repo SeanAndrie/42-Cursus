@@ -64,6 +64,6 @@
   <tr align="center">
     <td><b> ✅ | 125/100</b></td>
     <td><b> ✅ | 125/100</b></td>
-    <td><b> 🚧 | Pending Eval. </b></td>
+    <td><b> ✅ | 125/100</b></td>
   </tr>
 </table>
