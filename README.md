@@ -1,5 +1,5 @@
 # 42 Cursus
-- This portfolio showcases a collection of my completed projects from the 42 School curriculum, reflecting my hands-on experience in systems programming, algorithm design, and low-level software development. Each project demonstrates practical application of computer science fundamentals, including memory management, process control, data structures, and performance optimization, built entirely without relying on external libraries.
+- This repository showcases a collection of my completed projects from the 42 School curriculum, reflecting my hands-on experience in systems programming, algorithm design, and low-level software development. Each project demonstrates practical application of computer science fundamentals, including memory management, process control, data structures, and performance optimization, built entirely without relying on external libraries.
 
 ## Common Core
 - The 42 Common Core is the foundational phase of the 42 School curriculum. It is designed to develop strong programming fundamentals, problem-solving skills, and the ability to work independently in a peer-driven environment. 
