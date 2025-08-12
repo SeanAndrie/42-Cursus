@@ -70,7 +70,7 @@
 
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><a><code>philosophers</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/philosophers/tree/main"><code>philosophers</code></a></td>
     <td><a><code>minishell</code></a></td>
   </tr>
   <tr>
