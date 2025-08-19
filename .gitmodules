@@ -19,3 +19,6 @@
 [submodule "philosophers"]
 	path = philosophers
 	url = git@github.com:SeanAndrie/philosophers.git
+[submodule "bukoshell"]
+	path = bukoshell
+	url = git@github.com:SeanAndrie/bukoshell.git
