@@ -82,7 +82,7 @@
     </td>
   </tr>
   <tr align="center">
-    <td><b> 🚧 | In Progress</b></td>
+    <td><b> 🔄 | Pending Eval.</b></td>
     <td><b> 🚧 | In Progress</b></td>
   </tr>
 </table>
