@@ -71,7 +71,7 @@
 <table style="text-align:center;" align="center">
   <tr align="center">
     <td><a href="https://github.com/SeanAndrie/philosophers/tree/main"><code>philosophers</code></a></td>
-    <td><a><code>minishell</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/bukoshell/tree/main"><code>minishell</code></a></td>
   </tr>
   <tr>
     <td>
@@ -83,6 +83,6 @@
   </tr>
   <tr align="center">
     <td><b> ✅ | 125/100</b></td>
-    <td><b> 🚧 | In Progress</b></td>
+    <td><b> ✅ | 125/100</b></td>
   </tr>
 </table>
