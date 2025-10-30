@@ -86,3 +86,27 @@
     <td><b> ✅ | 125/100</b></td>
   </tr>
 </table>
+
+<table style="text-align:center;" align="center">
+  <tr align="center">
+    <td><a><code>CPP</code></a></td>
+    <td><a><code>NetPractice</code></a></td>
+    <td><a><code>miniRT</code></a></td>
+  </tr>
+  <tr>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/cppm.png"/></p>
+    </td>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/netpracticem.png"/></p>
+    </td>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/minirtm.png"/></p>
+    </td>
+  </tr>
+  <tr align="center">
+    <td><b> 🚧 | In progress</b></td>
+    <td><b> 🚧 | In progress</b></td>
+    <td><b> 🚧 | In progress</b></td>
+  </tr>
+</table>
