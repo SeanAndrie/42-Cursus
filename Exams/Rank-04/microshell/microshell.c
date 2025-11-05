@@ -122,9 +122,13 @@ int exec_pipeline_group(t_cmd *head, char **envp)
             break;
         curr = curr->next;
     }
-    int **pipes = create_pipes(size - 1);
-    if (size > 1 && !pipes)
-        fatal_error();
+    int **pipes = NULL;
+    if (size > 1)
+    {
+        pipes = create_pipes(size - 1);
+        if (!pipes)
+            fatal_error();
+    }
     pid_t  *pids = malloc(sizeof(pid_t) * size);
     if (!pids)
     {
@@ -142,16 +146,10 @@ int exec_pipeline_group(t_cmd *head, char **envp)
 
         if (pids[i] == 0)
         {
-            if (i > 0)
-            {
-                if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
-                    fatal_error();
-            }
-            if (i < size - 1)
-            {
-                if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
-                    fatal_error();
-            }
+            if (i > 0 && dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
+                fatal_error();
+            if (i < size - 1 && dup2(pipes[i][1], STDOUT_FILENO) == -1)
+                fatal_error();
             close_pipes(pipes, size - 1);
             execve(curr->argv[0], curr->argv, envp);
             ft_putstr_fd(STDERR_FILENO, "error: cannot execute ");
@@ -185,7 +183,7 @@ int main(int argc, char **argv, char **envp)
         if (curr->argv && strcmp(curr->argv[0], "cd") == 0)
         {
             if (!curr->argv[1] || curr->argv[2])
-                ft_putstr_fd(STDERR_FILENO, "error: cd bad arguments\n");
+                ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n");
             else if (chdir(curr->argv[1]) == -1)
             {
                 ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
@@ -203,4 +201,3 @@ int main(int argc, char **argv, char **envp)
     free_commands(&head);
     return (0);
 }
-

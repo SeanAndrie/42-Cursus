@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/wait.h>
-#include <stdio.h> // REMOVE THIS
 
 typedef struct s_cmd
 {
