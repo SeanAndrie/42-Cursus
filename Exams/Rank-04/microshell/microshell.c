@@ -163,13 +163,18 @@ int exec_pipeline_group(t_cmd *head, char **envp)
     close_pipes(pipes, size - 1);
     free(pipes);
     size_t j = 0;
+    int status = 0;
+    int last_status = 0;
     while (j < size)
     {
-        waitpid(pids[j], NULL, 0);
+        if (waitpid(pids[j], &status, 0) == -1)
+            fatal_error();
+        if (j == size - 1)
+            last_status = WIFEXITED(status) ? WEXITSTATUS(status) : 1;
         j++;
     }
     free(pids);
-    return (0);
+    return (last_status);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -183,12 +188,16 @@ int main(int argc, char **argv, char **envp)
         if (curr->argv && strcmp(curr->argv[0], "cd") == 0)
         {
             if (!curr->argv[1] || curr->argv[2])
+            {
                 ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n");
+                break;
+            }
             else if (chdir(curr->argv[1]) == -1)
             {
                 ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
                 ft_putstr_fd(STDERR_FILENO, curr->argv[1]);
                 ft_putstr_fd(STDERR_FILENO, "\n");
+                break;
             }
         }
         else
