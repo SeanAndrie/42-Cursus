@@ -22,3 +22,6 @@
 [submodule "bukoshell"]
 	path = bukoshell
 	url = git@github.com:SeanAndrie/bukoshell.git
+[submodule "miniRT"]
+	path = miniRT
+	url = git@github.com:SeanAndrie/miniRT.git
