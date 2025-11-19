@@ -1,0 +1,13 @@
+# Microshell Exam Dev. Pipeline
+
+1. Create files: microshell.c commands.c microshell.h
+    - microshell.c
+        functions: ft_strlen, ft_strdup, collect_argv, exec_pipeline, ft_putstr_fd,
+                    free_argv, create_pipes
+    - commands.c
+        functions: create_cmd, append_cmd, parse_cmds, free_cmds
+    - microshell.h
+        - File descriptor definitions
+        - Prototypes: collect_argv, parse_cmds, free_argv, free_cmds
+
+2. Create functions: ft_strlen, ft_strdup, ft_putstr_fd
