@@ -25,3 +25,6 @@
 [submodule "miniRT"]
 	path = miniRT
 	url = git@github.com:SeanAndrie/miniRT.git
+[submodule "CPP-Modules"]
+	path = CPP-Modules
+	url = git@github.com:SeanAndrie/CPP-Modules.git
