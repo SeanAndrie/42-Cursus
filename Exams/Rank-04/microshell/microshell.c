@@ -1,44 +1,63 @@
 #include "microshell.h"
 
-void    free_argv(char **argv, int i)
+void    free_av(char **av, int n)
 {
-    if (i > 0)
+    if (n > 0)
     {
-        while (--i > 0)
-            free(argv[i]);
+        while (--n >= 0)
+            free(av[n]);
     }
-    else if (i < 0)
+    else if (n < 0)
     {
-        i = 0;
-        while (argv[i])
+        n = 0;
+        while (av[n])
         {
-            free(argv[i]);
-            i++;
+            free(av[n]);
+            n++;
         }
     }
-    free(argv);
+    free(av);
 }
 
-size_t  ft_strlen(const char *s)
+void    free_cmds(t_cmd **head)
+{
+    if (!head || !*head)
+        return ;
+    t_cmd *next;
+    while (*head)
+    {
+        next = (*head)->next;
+        if ((*head)->av)
+            free_av((*head)->av, -1);
+        free(*head);
+        *head = next;
+    }
+}
+
+size_t ft_strlen(const char *s)
 {
     size_t len = 0;
     while (s[len]) len++;
     return (len);
 }
 
-size_t  ft_putstr_fd(int fd, const char *s)
+size_t ft_putstr_fd(int fd, const char *s)
 {
-    size_t  len = ft_strlen(s);
-    return (write(fd, s, len));
+    if (!s)
+        return (0);
+    size_t len = ft_strlen(s);
+    size_t ret = write(fd, s, len);
+    return (ret > 0) ? ret : 0;
 }
 
-char    *ft_strdup(const char *s)
+char *ft_strdup(const char *s)
 {
     if (!s)
         return (NULL);
     size_t len = ft_strlen(s), i = 0;
     char *dup = malloc(sizeof(char) * (len + 1));
-    if (!dup) return (NULL);
+    if (!dup)
+        return (NULL);
     while (i < len)
     {
         dup[i] = s[i];
@@ -48,28 +67,91 @@ char    *ft_strdup(const char *s)
     return (dup);
 }
 
-char    **collect_argv(size_t start, size_t end, char **argv)
+void fatal_error(void)
 {
-    if (end < start)
+    ft_putstr_fd(STDERR_FILENO, "error: fatal\n");
+    exit(1);
+}
+
+char **collect_av(size_t start, size_t end, char **av)
+{
+    if (!av || !*av || end < start)
         return (NULL);
-    size_t total_size = (end - start) + 1, i = 0;
-    char **sub = malloc(sizeof(char *) * (total_size + 1));
+    size_t len = (end - start) + 1, i = 0;
+    char **sub = malloc(sizeof(char *) * (len + 1));
     if (!sub)
         return (NULL);
-    while (i < total_size)
+    while (i < len)
     {
-        sub[i] = ft_strdup(argv[start + i]);
+        sub[i] = ft_strdup(av[start + i]);
         if (!sub[i])
-            return (free_argv(sub, i), NULL);
+            return (free_av(sub, i), NULL);
         i++;
     }
-    sub[total_size] = NULL;
+    sub[i] = NULL;
     return (sub);
+}
+
+t_cmd *create_cmd(size_t start, size_t end, char **av)
+{
+    if (!av || !*av || end < start)
+        return (NULL);
+    t_cmd *cmd = malloc(sizeof(t_cmd));
+    if (!cmd)
+        return (NULL);
+    cmd->av = collect_av(start, end, av);
+    if (!cmd->av)
+    {
+        free(cmd);
+        return (NULL);
+    }
+    cmd->next = NULL;
+    return (cmd);
+}
+
+void    append_cmd(t_cmd **head, t_cmd *cmd)
+{
+    if (!cmd)
+        return ;
+    if (!*head)
+    {
+        *head = cmd;
+        return ;
+    }
+    t_cmd *last = *head;
+    while (last->next)
+        last = last->next;
+    last->next = cmd;
+}
+
+t_cmd *parse_cmds(int ac, char **av)
+{
+    if (ac == 1 || !av || !*av)
+        return (NULL);
+    t_cmd *head = NULL;
+    int i = 1, start = 1;
+    while (i < ac)
+    {
+        while (i < ac && strcmp(av[i], "|") != 0 && strcmp(av[i], ";") != 0)
+            i++;
+        t_cmd *cmd = create_cmd(start, i - 1, av);
+        if (!cmd)
+        {
+            free_cmds(&head);
+            return (NULL);
+        }
+        cmd->pipe_after = (i < ac && strcmp(av[i], "|") == 0);
+        append_cmd(&head, cmd);
+        if (i < ac && (strcmp(av[i], "|") == 0 || strcmp(av[i], ";") == 0))
+            i++;
+        start = i;
+    }
+    return (head);
 }
 
 void    close_pipes(int **pipes, size_t size)
 {
-    if (!pipes || !*pipes)
+    if (!pipes || size == 0)
         return ;
     size_t i = 0;
     while (i < size)
@@ -87,11 +169,11 @@ int **create_pipes(size_t size)
     int **pipes = malloc((sizeof(int *) * size) + (sizeof(int) * 2 * size));
     if (!pipes)
         return (NULL);
-    int *block = (int *)(pipes + size);
+    int *fds = (int *)(pipes + size);
     size_t i = 0;
     while (i < size)
     {
-        pipes[i] = &block[i * 2];
+        pipes[i] = &fds[i * 2];
         if (pipe(pipes[i]) == -1)
         {
             close_pipes(pipes, i);
@@ -103,110 +185,103 @@ int **create_pipes(size_t size)
     return (pipes);
 }
 
-void    fatal_error(void)
+int exec_pipeline(t_cmd *head, char **env)
 {
-    ft_putstr_fd(STDERR_FILENO, "error: fatal\n");
-    exit(1);
-}
-
-int exec_pipeline_group(t_cmd *head, char **envp)
-{
-    if (!head || !envp)
+    if (!head || !env)
         return (1);
-    size_t  size = 0;
-    t_cmd   *curr = head;
+    size_t n_cmds = 0;
+    t_cmd *curr = head;
     while (curr)
     {
-        size++;
+        n_cmds++;
         if (!curr->pipe_after)
             break;
         curr = curr->next;
     }
     int **pipes = NULL;
-    if (size > 1)
+    if (n_cmds > 1)
     {
-        pipes = create_pipes(size - 1);
+        pipes = create_pipes(n_cmds - 1);
         if (!pipes)
-            fatal_error();
+            return (1);
     }
-    pid_t  *pids = malloc(sizeof(pid_t) * size);
+    pid_t *pids = malloc(sizeof(pid_t) * n_cmds);
     if (!pids)
     {
-        close_pipes(pipes, size - 1);
-        free(pipes);
-        fatal_error();
+        if (pipes)
+        {
+            close_pipes(pipes, n_cmds - 1);
+            free(pipes);
+        }
+        return (1);
     }
-    curr = head;
     size_t i = 0;
-    while (curr && i < size)
+    curr = head;
+    while (curr && i < n_cmds)
     {
         pids[i] = fork();
         if (pids[i] == -1)
             fatal_error();
-
         if (pids[i] == 0)
         {
             if (i > 0 && dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
                 fatal_error();
-            if (i < size - 1 && dup2(pipes[i][1], STDOUT_FILENO) == -1)
+            if (i < n_cmds - 1 && dup2(pipes[i][1], STDOUT_FILENO) == -1)
                 fatal_error();
-            close_pipes(pipes, size - 1);
-            execve(curr->argv[0], curr->argv, envp);
+            close_pipes(pipes, n_cmds - 1);
+            execve(curr->av[0], curr->av, env);
             ft_putstr_fd(STDERR_FILENO, "error: cannot execute ");
-            ft_putstr_fd(STDERR_FILENO, curr->argv[0]);
+            ft_putstr_fd(STDERR_FILENO, curr->av[0]);
             ft_putstr_fd(STDERR_FILENO, "\n");
             exit(1);
         }
-        curr = curr->next;
         i++;
+        curr = curr->next;
     }
-    close_pipes(pipes, size - 1);
+    close_pipes(pipes, n_cmds - 1);
     free(pipes);
     size_t j = 0;
     int status = 0;
     int last_status = 0;
-    while (j < size)
+    while (j < n_cmds)
     {
         if (waitpid(pids[j], &status, 0) == -1)
             fatal_error();
-        if (j == size - 1)
-            last_status = WIFEXITED(status) ? WEXITSTATUS(status) : 1;
+        if (j == n_cmds - 1)
+            last_status = (WIFEXITED(status)) ? WEXITSTATUS(status) : 1;
         j++;
     }
     free(pids);
     return (last_status);
 }
 
-int main(int argc, char **argv, char **envp)
+int main(int ac, char **av, char **env)
 {
-    t_cmd *head = parse_commands(argc, argv);
+    int status = 0;
+    t_cmd *head = parse_cmds(ac, av);
     if (!head)
-        fatal_error();
+        return (0);
     t_cmd *curr = head;
     while (curr)
     {
-        if (curr->argv && strcmp(curr->argv[0], "cd") == 0)
+        if (curr->av && strcmp(curr->av[0], "cd") == 0)
         {
-            if (!curr->argv[1] || curr->argv[2])
-            {
+            if (!curr->av[1] || curr->av[2])
                 ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n");
-                break;
-            }
-            else if (chdir(curr->argv[1]) == -1)
+            else if (chdir(curr->av[1]) == -1)
             {
-                ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
-                ft_putstr_fd(STDERR_FILENO, curr->argv[1]);
-                ft_putstr_fd(STDERR_FILENO, "\n");
-                break;
-            }
+            ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
+            ft_putstr_fd(STDERR_FILENO, curr->av[1]);
+            ft_putstr_fd(STDERR_FILENO, "\n");
+        }
         }
         else
-            exec_pipeline_group(curr, envp);
+        status = exec_pipeline(curr, env);
         while (curr && curr->pipe_after)
             curr = curr->next;
         if (curr)
             curr = curr->next;
     }
-    free_commands(&head);
-    return (0);
+    free_cmds(&head);
+    return (status);
 }

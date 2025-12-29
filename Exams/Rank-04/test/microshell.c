@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -21,6 +22,12 @@ size_t ft_putstr_fd(int fd, const char *s)
     return (write(fd, s, ft_strlen(s)));
 }
 
+void fatal_error(void)
+{
+    ft_putstr_fd(STDERR_FILENO, "error: fatal\n");
+    exit(1);
+}
+
 char **extract_cmd(size_t start, size_t end, char **av)
 {
     if (!av || !*av || end < start)
@@ -38,21 +45,18 @@ char **extract_cmd(size_t start, size_t end, char **av)
     return (cmd);
 }
 
-void fatal_error(void)
-{
-    ft_putstr_fd(STDERR_FILENO, "error: fatal\n");
-    exit(1);
-}
-
 int do_cd(char **cmd)
 {
-    size_t cnt = 0;
+    int cnt = 0;
     while (cmd[cnt]) cnt++;
     if (cnt != 2)
-        return (ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n"), 1);
+    {
+        ft_putstr_fd(STDERR_FILENO, "error: cd: bad arguments\n");
+        return (1);
+    }
     if (chdir(cmd[0]) == -1)
     {
-        ft_putstr_fd(STDERR_FILENO, "error: cd: could change directory to ");
+        ft_putstr_fd(STDERR_FILENO, "error: cd: cannot change directory to ");
         ft_putstr_fd(STDERR_FILENO, cmd[0]);
         ft_putstr_fd(STDERR_FILENO, "\n");
         return (1);
@@ -81,12 +85,11 @@ int exec_cmd(char **cmd, char **envp, int has_pipe)
             close(pipefd[1]);
         }
         execve(cmd[0], cmd, envp);
-        ft_putstr_fd(STDERR_FILENO, "error: cannot execute ");
+        ft_putstr_fd(STDERR_FILENO, "error cannot execute ");
         ft_putstr_fd(STDERR_FILENO, cmd[0]);
         ft_putstr_fd(STDERR_FILENO, "\n");
         exit(1);
     }
-    waitpid(pid, &status, 0);
     if (has_pipe)
     {
         if (dup2(pipefd[0], STDIN_FILENO) == -1)
