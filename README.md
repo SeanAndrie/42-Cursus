@@ -107,6 +107,6 @@
   <tr align="center">
     <td><b> 🚧 | In progress</b></td>
     <td><b> 🚧 | In progress</b></td>
-    <td><b> 🚧 | In progress</b></td>
+    <td><b> ✅ | 125/100</b></td>
   </tr>
 </table>
