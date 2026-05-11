@@ -28,3 +28,6 @@
 [submodule "miniRT"]
 	path = miniRT
 	url = git@github.com:SeanAndrie/miniRT.git
+[submodule "NetPractice"]
+	path = NetPractice
+	url = git@github.com:SeanAndrie/NetPractice.git
