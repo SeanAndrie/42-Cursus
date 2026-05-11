@@ -89,9 +89,9 @@
 
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><a><code>CPP</code></a></td>
-    <td><a><code>NetPractice</code></a></td>
-    <td><a><code>miniRT</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/CPP-Modules"><code>CPP</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/NetPractice"><code>NetPractice</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/miniRT"><code>miniRT</code></a></td>
   </tr>
   <tr>
     <td>
