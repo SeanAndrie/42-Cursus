@@ -3,6 +3,16 @@
 
 # include <iostream>
 
+/*
+**  NOTE: List of operation overloads to implement
+**       - Arithmetic by value & reference (+, -, *, /)
+**       - Scalar Arithmetic by value & reference
+**       - Equal to and Not Equal to  (== , !=)
+**       - Indexing (0, 1 only)
+**       - Post/Pre Increment/Decrement (Pre -> by reference, Post -> by value)
+**       - Outstream overload
+*/
+
 class vect2 {
 
 private:
