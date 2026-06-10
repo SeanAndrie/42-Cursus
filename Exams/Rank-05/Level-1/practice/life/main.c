@@ -1,26 +1,18 @@
-#include "life.h"
+# include "life.h"
 
-static void board_free(t_board *b) {
-    if (!b)
-        return ;
-    if (b->grid)
-        free(b->grid);
-    free(b);
-}
-
-static t_board *board_create(const int w, const int h) {
-    t_board *b;
-
+static t_board* board_create(const int w, const int h) {
     if (w == 0 || h == 0)
         return NULL;
-    b = malloc(sizeof(t_board));
+    t_board *b = malloc(sizeof(t_board));
     if (!b)
         return NULL;
     b->width = w;
     b->height = h;
     b->grid = calloc(1, (sizeof(char *) * h) + (sizeof(char) * w * h));
-    if (!b->grid)
-        return false;
+    if (!b->grid) {
+        free(b);
+        return NULL;
+    }
     char *data = (char *)(b->grid + h);
     for (int i = 0; i < h; i++)
         b->grid[i] = data + (i * w);
@@ -67,40 +59,37 @@ static t_range create_range(const int n, const int max) {
     return r;
 }
 
-static int count_neighbors(t_board *b, int x, int y) {
-    int n;
-    t_range x_r, y_r;
+static int count_neighbors(t_board *b, const int y, const int x) {
+    int n = 0;
+    t_range y_r;
+    t_range x_r;
 
-    if (!b || !b->grid)
-        return 0;
-    n = 0;
     y_r = create_range(y, b->height);
     x_r = create_range(x, b->width);
     for (int i = y_r.start; i < y_r.end; i++) {
         for (int j = x_r.start; j < x_r.end; j++) {
-            if (b->grid[i][j] && !(x == j && y == i))
+            if (b->grid[i][j] && !(y == i && x == j))
                 n++;
         }
     }
     return n;
 }
 
-static t_board *life_step(t_board *b) {
+static t_board *life_step(t_board *b)
+{
     t_board *new = board_create(b->width, b->height);
-
+    if (!new)
+        return NULL;
     for (int i = 0; i < b->height; i++) {
         for (int j = 0; j < b->width; j++) {
-
-            int n = count_neighbors(b, j, i);
-            bool alive = b->grid[i][j];
-
+            int n = count_neighbors(b, i, j);
+            bool alive = (b->grid[i][j]);
             if (alive && (n == 2 || n == 3))
                 new->grid[i][j] = 1;
             else if (!alive && n == 3)
                 new->grid[i][j] = 1;
         }
     }
-
     return new;
 }
 
@@ -114,14 +103,13 @@ int main(int ac, char **av) {
 
     board_draw(b);
     for (int i = 0; i < atoi(av[3]); i++) {
-        t_board *tmp  = life_step(b);
+        t_board *new = life_step(b);
         board_free(b);
-        if (!tmp)
+        if (!new)
             return 1;
-        b = tmp;
+        b = new;
     }
     board_print(b);
     board_free(b);
-
     return 0;
 }
