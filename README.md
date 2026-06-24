@@ -89,7 +89,7 @@
 
 <table style="text-align:center;" align="center">
   <tr align="center">
-    <td><a href="https://github.com/SeanAndrie/CPP-Modules"><code>CPP</code></a></td>
+    <td><a href="https://github.com/SeanAndrie/CPP-Modules"><code>CPP Modules 0-4</code></a></td>
     <td><a href="https://github.com/SeanAndrie/NetPractice"><code>NetPractice</code></a></td>
     <td><a href="https://github.com/SeanAndrie/miniRT"><code>miniRT</code></a></td>
   </tr>
@@ -108,5 +108,29 @@
     <td><b> ✅ | 100/100</b></td>
     <td><b> ✅ | 100/100</b></td>
     <td><b> ✅ | 125/100</b></td>
+  </tr>
+</table>
+
+<table style="text-align:center;" align="center">
+  <tr align="center">
+    <td><a href="https://github.com/SeanAndrie/CPP-Modules"><code>CPP Modules 5-9</code></a></td>
+    <td><a"><code>IRC</code></a></td>
+    <td><a"><code>Inception</code></a></td>
+  </tr>
+  <tr>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/cppm.png"/></p>
+    </td>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/ft_ircm.png"/></p>
+    </td>
+    <td>
+      <p><img src="https://github.com/SeanAndrie/42-project-badges/blob/main/badges/inceptionm.png"/></p>
+    </td>
+  </tr>
+  <tr align="center">
+    <td><b> 🚧 | In-Progress</b></td>
+    <td><b> 🚧 | In-Progress</b></td>
+    <td><b> 🚧 | In-Progress</b></td>
   </tr>
 </table>
