@@ -114,7 +114,7 @@
 <table style="text-align:center;" align="center">
   <tr align="center">
     <td><a href="https://github.com/SeanAndrie/CPP-Modules"><code>CPP Modules 5-9</code></a></td>
-    <td><a"><code>IRC</code></a></td>
+    <td><a"><code>ft_irc</code></a></td>
     <td><a"><code>Inception</code></a></td>
   </tr>
   <tr>
